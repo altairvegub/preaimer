@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+/*
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -24,6 +24,52 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+*/
+
+body,
+body > div:first-child,
+div#__next,
+div#__next > div {
+  height: 100%;
+}
+
+html {
+  background-color: rgb(22, 38, 54);
+}
+
+div .game{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.game {
+  background-color: rgb(9, 19, 31);
+  padding: 30px;
+}
+
+#score {
+  color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+}
+
+#tracker {
+  color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+}
+
+
+#header {
+  font-size: 4em;
+  color: #FFFFFF;
+  background-color: rgb(22, 38, 54);
+  display: flex;
+  justify-content: center;
+  padding: 15px;
 }
 
 @layer utilities {
