@@ -3,11 +3,11 @@ import Game from '../components/Game'
 import Score from '../components/Score'
 
 export default function Home() {
-  return (
-    <div className='game'>
-      <Game />
-      <Score />
-      <CursorTracker />
-    </div>
-  );
+    return (
+        <div className='game'>
+            <Game />
+            <CursorTracker />
+            <Score />
+        </div>
+    );
 }
