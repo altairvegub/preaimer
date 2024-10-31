@@ -1,38 +1,22 @@
-"use client"
-
 import Image from 'next/image'
-import { useEffect, useRef } from 'react'
+import CanvasDrawing from './CanvasDrawing';
 
-export default function Game() {
-    const canvasRef = useRef<HTMLCanvasElement>(null)
+interface GameProps {
+    x: number;
+    y: number;
+}
 
-    useEffect(() => {
-        const canvas = canvasRef.current
-        if (canvas === null) {
-            return
-        }
-
-        const ctx = canvas.getContext('2d')
-        if (ctx === null) {
-            return
-        }
-
-        ctx.fillStyle = "rgb(200 0 0)";
-        ctx.fillRect(0, 0, 50, 50);
-    }, [])
+export default function Game({ x, y }: GameProps) {
 
     return (
         <>
-            <div className="game">
-                <canvas ref={canvasRef}
-                    style={{
-                        position: 'absolute',
-                        top: 180,
-                        left: 68,
-                        pointerEvents: 'none',
-                    }}></canvas>
-                <Image id="myImgId" src={`/screenshots/ascent_1_peek.png`} alt="angle" width='1920' height='1080' fill={false} objectFit='cover' />
-            </div>
+            <CanvasDrawing
+                width={2484}
+                height={1397}
+                rectangleSize={5}
+                color="#ffffff"
+            />
+            <Image id="myImgId" src={`/screenshots/ascent_1_peek.png`} alt="angle" width='2560' height='1440' fill={false} style={{ objectFit: "cover" }} />
         </>
     );
 }
