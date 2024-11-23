@@ -2,9 +2,8 @@ import Image from 'next/image'
 
 export default function GameResult() {
 
-
     return (
-        <div style={{ position: 'relative', width: '1280px', height: '720px', overflow: 'hidden' }}>
+        <div style={{ position: 'relative', width: '1920px', height: '1080px', overflow: 'hidden' }}>
             <div style={{
                 position: 'absolute',
                 width: '100%',

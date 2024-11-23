@@ -20,7 +20,7 @@ export default function CursorTracker() {
     const [imgPos, setImgPos] = useState<ImageCoord>({ xLeft: 0, xRight: 0, yTop: 0, yBottom: 0 })
     //const targetPos = { x: 1212, y: 686 };
 
-    const handleMouseMove = (event: any) => {
+    const handleMouseMove = (event: MouseEvent) => {
         setPosition({
             x: event.clientX,
             y: event.clientY,

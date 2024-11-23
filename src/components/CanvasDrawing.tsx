@@ -1,19 +1,13 @@
 import { useEffect, useRef } from 'react';
-import type { MouseEvent } from 'react';
+import type { MouseEvent, MouseEventHandler } from 'react';
 
 interface CanvasProps {
     width?: number;
     height?: number;
-    rectangleSize?: number;
-    color?: string;
+    onClick: MouseEventHandler<HTMLElement>;
 }
 
-const CanvasDrawing: React.FC<CanvasProps> = ({
-    width = 800,
-    height = 600,
-    rectangleSize = 10,
-    color = 'blue'
-}) => {
+const CanvasDrawing: React.FC<CanvasProps> = ({ width, height, onClick }) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
     const drawRectangle = (e: MouseEvent<HTMLCanvasElement>) => {
@@ -32,6 +26,9 @@ const CanvasDrawing: React.FC<CanvasProps> = ({
         //const scaleY = canvas.height / rect.height;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        let rectangleSize = 5
+        let color = '#FFFFFF'
 
         //stroke
         ctx.imageSmoothingEnabled = true;
@@ -61,25 +58,23 @@ const CanvasDrawing: React.FC<CanvasProps> = ({
         return () => {
             canvas.removeEventListener('click', drawRectangle as unknown as EventListener);
         };
-    }, [color, rectangleSize]);
+    }, []);
 
     return (
         <>
-            <canvas
-                ref={canvasRef}
-                width={width}
-                height={height}
-                className="border border-gray-300"
-                onClick={drawRectangle}
-                style={{
-                    position: 'absolute',
-                    cursor: 'crosshair'
-                }}
-            />
-            {/*
-            <p style={{ color: 'white' }}>CursorDraw Click position: {`X: ${coordinates.xCoord}, Y: ${coordinates.yCoord}`}<br />
-            </p>
-            */}
+            <div >
+                <canvas
+                    ref={canvasRef}
+                    width={width}
+                    height={height}
+                    onClick={onClick}
+                    className="border border-gray-300"
+                    style={{
+                        position: 'absolute',
+                        cursor: 'crosshair'
+                    }}
+                />
+            </div>
         </>
     );
 };
