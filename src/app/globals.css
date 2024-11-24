@@ -62,13 +62,13 @@ div .game{
   justify-content: center;
 }
 
-
 #header {
-  font-size: 3.25em;
+  font-size: 2em;
   color: #FFFFFF;
   background-color: rgb(9, 19, 31);
   display: flex;
   justify-content: left;
+  align-items: center;
   padding: 10px;
   padding-left: 20px;
 

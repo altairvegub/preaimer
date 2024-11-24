@@ -1,29 +1,25 @@
 import { useEffect, useRef } from 'react';
-import type { MouseEvent, MouseEventHandler } from 'react';
+import type { MouseEventHandler } from 'react';
 
 interface CanvasProps {
     width?: number;
     height?: number;
     onClick: MouseEventHandler<HTMLElement>;
+    coordinates: Coordinates;
 }
 
-const CanvasDrawing: React.FC<CanvasProps> = ({ width, height, onClick }) => {
+const CanvasDrawing: React.FC<CanvasProps> = ({ width, height, onClick, coordinates }) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-    const drawRectangle = (e: MouseEvent<HTMLCanvasElement>) => {
+    const drawRectangle = (coordinates: Coordinates) => {
         const canvas = canvasRef.current;
         if (!canvas) return;
 
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        const rect = canvas.getBoundingClientRect();
-
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        //const scaleX = canvas.width / rect.width;
-        //const scaleY = canvas.height / rect.height;
+        const x = coordinates.x;
+        const y = coordinates.y;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -50,15 +46,8 @@ const CanvasDrawing: React.FC<CanvasProps> = ({ width, height, onClick }) => {
     };
 
     useEffect(() => {
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-
-        canvas.addEventListener('click', drawRectangle as unknown as EventListener);
-
-        return () => {
-            canvas.removeEventListener('click', drawRectangle as unknown as EventListener);
-        };
-    }, []);
+        drawRectangle(coordinates);
+    }, [coordinates]);
 
     return (
         <>
@@ -68,7 +57,7 @@ const CanvasDrawing: React.FC<CanvasProps> = ({ width, height, onClick }) => {
                     width={width}
                     height={height}
                     onClick={onClick}
-                    className="border border-gray-300"
+                    className="border border-slate-800"
                     style={{
                         position: 'absolute',
                         cursor: 'crosshair'

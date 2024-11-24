@@ -10,11 +10,6 @@ type GameState = {
     scenario: number
 }
 
-type Coordinates = {
-    x: number,
-    y: number
-}
-
 const DebugPanel = ({ coordinates, gameState }: any) => (
     <div className="mt-4 p-4 text-white bg-midnight rounded text-sm">
         <h3 className="font-bold mb-2">Debug Info</h3>
@@ -60,7 +55,7 @@ export default function GameController() {
                 onStart={handleGameStart}
             />
 
-            <CanvasDrawing width={2540} height={1430} onClick={handleGameClick} />
+            <CanvasDrawing width={2542} height={1430} onClick={handleGameClick} coordinates={coordinates} />
             <GameGraphics />
 
             <DebugPanel coordinates={coordinates} gameState={gameState} />
