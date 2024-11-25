@@ -5,12 +5,12 @@ import GameGraphics from './GameGraphics';
 import CanvasDrawing from './CanvasDrawing';
 
 type GameState = {
-    isPlaying: boolean,
+    status: GameStatus,
     score: number,
     scenario: number
 }
 
-const DebugPanel = ({ coordinates, gameState }: any) => (
+const DebugPanel = ({ coordinates, gameState }: { coordinates: Coordinates, gameState: GameState }) => (
     <div className="mt-4 p-4 text-white bg-midnight rounded text-sm">
         <h3 className="font-bold mb-2">Debug Info</h3>
         <div>Coordinates: ({Math.round(coordinates.x)}, {Math.round(coordinates.y)})</div>
@@ -20,16 +20,16 @@ const DebugPanel = ({ coordinates, gameState }: any) => (
 
 export default function GameController() {
     const [gameState, setGameState] = useState<GameState>({
-        isPlaying: false,
+        status: "idle",
         score: 0,
         scenario: 1
     });
 
-    const [coordinates, setCoordinates] = useState<Coordinates>({ x: 0, y: 0 });
+    const handleState = (gameStatus: GameStatus) => {
+        setGameState(prev => ({ ...prev, status: gameStatus }))
+    }
 
-    const handleGameStart = () => {
-        setGameState(prev => ({ ...prev, isPlaying: true }));
-    };
+    const [coordinates, setCoordinates] = useState<Coordinates>({ x: -5, y: -5 }); // hide rectangle outside of canvas on initial render
 
     const handleGameClick = useCallback((e: MouseEvent) => {
         const bounds = e.currentTarget.getBoundingClientRect();
@@ -39,25 +39,23 @@ export default function GameController() {
         setCoordinates({ x, y });
     }, []);
 
-    const updateScore = useCallback((points: number) => {
-        setGameState(prev => ({
-            ...prev,
-            score: prev.score + points
-        }));
-    }, []);
+    //const updateScore = useCallback((points: number) => {
+    //    setGameState(prev => ({
+    //        ...prev,
+    //        score: prev.score + points
+    //    }));
+    //}, []);
 
     return (
         <>
             <GameHeader
                 score={gameState.score}
                 scenario={gameState.scenario}
-                isPlaying={gameState.isPlaying}
-                onStart={handleGameStart}
+                status={gameState.status}
+                changeGameStatus={handleState}
             />
-
-            <CanvasDrawing width={2542} height={1430} onClick={handleGameClick} coordinates={coordinates} />
+            <CanvasDrawing width={2543} height={1430} onClick={handleGameClick} coordinates={coordinates} />
             <GameGraphics />
-
             <DebugPanel coordinates={coordinates} gameState={gameState} />
         </>
     )
