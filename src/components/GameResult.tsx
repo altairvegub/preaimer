@@ -25,7 +25,7 @@ const GameResult: React.FC<GameResultProps> = ({ coordinates }) => {
                         height: '1080px',
                         backgroundPosition: 'center',
                         transition: 'all 1s ease',
-                        transform: 'scale(4)',
+                        transform: 'scale(3)',
                         transformOrigin: `${coordinates.x * (1920 / 2540)}px ${coordinates.y * (1080 / 1430)}px`,
                         position: 'relative',
                         left: 0,
