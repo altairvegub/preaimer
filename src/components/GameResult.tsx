@@ -24,14 +24,23 @@ const GameResult: React.FC<GameResultProps> = ({ coordinates }) => {
                         width: '1920px',
                         height: '1080px',
                         backgroundPosition: 'center',
-                        transition: 'all 1s ease',
-                        transform: 'scale(3)',
-                        transformOrigin: `${coordinates.x * (1920 / 2540)}px ${coordinates.y * (1080 / 1430)}px`,
+                        animation: `panTransformOrigin 2000ms ease forwards`,
+                        transform: 'scale(2.25)',
                         position: 'relative',
                         left: 0,
                         top: 0,
                     }}
                 />
+                <style jsx>{`
+                   @keyframes panTransformOrigin {
+                     0% {
+                       transform-origin: ${coordinates.x * (1920 / 2540)}px ${coordinates.y * (1080 / 1430)}px;
+                     }
+                     100% {
+                       transform-origin: ${960}px ${540}px;
+                     }
+                   }
+                 `}</style>
             </div>
         </div>
     )
