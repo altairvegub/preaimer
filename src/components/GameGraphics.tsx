@@ -1,9 +1,20 @@
+import CanvasDrawing from "./CanvasDrawing";
 import Game from "./Game";
+import type { MouseEventHandler } from 'react';
 
-export default function GameGraphics({ x, y }: any) {
+interface GameGraphicsProps {
+    width?: number;
+    height?: number;
+    onClick: MouseEventHandler<HTMLElement>;
+    coordinates: Coordinates;
+}
+
+export default function GameGraphics({ width, height, onClick, coordinates }: GameGraphicsProps) {
 
     return (
-        <Game x={x} y={y} />
+        <>
+            <CanvasDrawing width={width} height={height} onClick={onClick} coordinates={coordinates} />
+            <Game x={coordinates.x} y={coordinates.y} />
+        </>
     );
-
 }

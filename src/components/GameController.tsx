@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import type { MouseEvent } from 'react';
 import GameHeader from './GameHeader';
 import GameGraphics from './GameGraphics';
-import CanvasDrawing from './CanvasDrawing';
+import GameResult from './GameResult';
 
 type GameState = {
     status: GameStatus,
@@ -54,8 +54,16 @@ export default function GameController() {
                 status={gameState.status}
                 changeGameStatus={handleState}
             />
-            <CanvasDrawing width={2543} height={1430} onClick={handleGameClick} coordinates={coordinates} />
-            <GameGraphics />
+            {gameState.status === 'playing' &&
+                <>
+                    <GameGraphics width={2540} height={1430} onClick={handleGameClick} coordinates={coordinates} />
+                </>
+            }
+            {gameState.status === 'showResult' &&
+                <div className="flex justify-center min-h-screen">
+                    <GameResult coordinates={coordinates} />
+                </div>
+            }
             <DebugPanel coordinates={coordinates} gameState={gameState} />
         </>
     )
