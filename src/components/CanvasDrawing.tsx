@@ -8,7 +8,7 @@ interface CanvasProps {
     coordinates: Coordinates;
 }
 
-const CanvasDrawing: React.FC<CanvasProps> = ({ width, height, onClick, coordinates }) => {
+function CanvasDrawing({ width, height, onClick, coordinates }: CanvasProps) {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
     const drawRectangle = (coordinates: Coordinates) => {

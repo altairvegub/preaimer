@@ -12,7 +12,7 @@ const gameStatusTransitions: Record<GameStatus, GameStatus> = {
     gameOver: 'idle'
 };
 
-export default function GameHeader({ score, scenario, status, changeGameStatus }: GameHeaderProps) {
+function GameHeader({ score, scenario, status, changeGameStatus }: GameHeaderProps) {
 
     return (
         <div className="flex justify-between items-center mb-4 p-4 text-white bg-midnight rounded">
@@ -40,3 +40,5 @@ export default function GameHeader({ score, scenario, status, changeGameStatus }
         </div>
     );
 }
+
+export default GameHeader;

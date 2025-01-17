@@ -5,11 +5,13 @@ interface GameProps {
     y: number;
 }
 
-export default function Game({ x, y }: GameProps) {
+function Game({ x, y }: GameProps) {
 
     return (
         <>
-            <Image id="myImgId" className="select-none" src={`/screenshots/ascent_1_peek.png`} alt="angle" width='2560' height='1440' fill={false} style={{ objectFit: "cover" }} />
+            <Image id="myImgId" className="select-none" src={`/screenshots/4k_range.jpg`} alt="angle" width='2560' height='1440' fill={false} style={{ objectFit: "cover" }} />
         </>
     );
 }
+
+export default Game;

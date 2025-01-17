@@ -18,7 +18,7 @@ const DebugPanel = ({ coordinates, gameState }: { coordinates: Coordinates, game
     </div>
 );
 
-export default function GameController() {
+function GameController() {
     const [gameState, setGameState] = useState<GameState>({
         status: "idle",
         score: 0,
@@ -61,10 +61,12 @@ export default function GameController() {
             }
             {gameState.status === 'showResult' &&
                 <div className="flex justify-center min-h-screen">
-                    <GameResult coordinates={coordinates} />
+                    <GameResult coordinates={coordinates} onClick={handleGameClick} />
                 </div>
             }
             <DebugPanel coordinates={coordinates} gameState={gameState} />
         </>
     )
 }
+
+export default GameController;

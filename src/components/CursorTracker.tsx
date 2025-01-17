@@ -14,7 +14,7 @@ type ImageCoord = {
     yBottom: number;
 }
 
-export default function CursorTracker() {
+function CursorTracker() {
     const [position, setPosition] = useState<Coordinate>({ x: 0, y: 0 });
     const [clickPos, setClickPos] = useState<Coordinate>({ x: 0, y: 0 });
     const [imgPos, setImgPos] = useState<ImageCoord>({ xLeft: 0, xRight: 0, yTop: 0, yBottom: 0 })
@@ -64,3 +64,5 @@ export default function CursorTracker() {
         </>
     );
 }
+
+export default CursorTracker;

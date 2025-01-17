@@ -3,4 +3,8 @@ type Coordinates = {
     y: number;
 }
 
+type GameInfo = {
+
+}
+
 type GameStatus = 'idle' | 'playing' | 'showResult' | 'gameOver';

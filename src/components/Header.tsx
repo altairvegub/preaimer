@@ -6,7 +6,7 @@ const lato = Lato({
     weight: ['400', '700'],
 });
 
-export default function Header() {
+function Header() {
     return (
         <div id='header' className={lato.className}>
             <div className="pr-1">
@@ -16,3 +16,5 @@ export default function Header() {
         </div>
     )
 }
+
+export default Header;

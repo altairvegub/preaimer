@@ -9,7 +9,7 @@ interface GameGraphicsProps {
     coordinates: Coordinates;
 }
 
-export default function GameGraphics({ width, height, onClick, coordinates }: GameGraphicsProps) {
+function GameGraphics({ width, height, onClick, coordinates }: GameGraphicsProps) {
 
     return (
         <>
@@ -18,3 +18,5 @@ export default function GameGraphics({ width, height, onClick, coordinates }: Ga
         </>
     );
 }
+
+export default GameGraphics;
