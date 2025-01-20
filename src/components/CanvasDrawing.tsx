@@ -51,7 +51,7 @@ function CanvasDrawing({ width, height, onClick, coordinates }: CanvasProps) {
 
     return (
         <>
-            <div >
+            <div>
                 <canvas
                     ref={canvasRef}
                     width={width}
