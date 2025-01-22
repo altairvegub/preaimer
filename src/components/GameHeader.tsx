@@ -27,7 +27,7 @@ function GameHeader({ score, scenario, status, changeGameStatus }: GameHeaderPro
                     style={{
                         zIndex: 1,
                         position: 'fixed',
-                        bottom: '40px',
+                        bottom: '10rem',
                         left: '50%',
                         transform: 'translateX(-50%)',
                     }}
@@ -37,12 +37,12 @@ function GameHeader({ score, scenario, status, changeGameStatus }: GameHeaderPro
             ) :
                 (
                     <button
-                        className="w-72 px-5 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                        className="w-72 px-5 py-3 bg-red-500 text-white rounded hover:bg-red-600"
                         onClick={() => changeGameStatus(gameStatusTransitions[status])}
                         style={{
                             zIndex: 1,
                             position: 'fixed',
-                            bottom: '40px',
+                            bottom: '10rem',
                             left: '50%',
                             transform: 'translateX(-50%)',
                         }}
