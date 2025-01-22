@@ -84,7 +84,7 @@ function GameController() {
             />
             {gameState.status === 'playing' &&
                 <>
-                    <GameGraphics width={2540} height={1430} onClick={handleGameClick} coordinates={coordinates} />
+                    <GameGraphics width={2560} height={1440} onClick={handleGameClick} coordinates={coordinates} />
                 </>
             }
             {gameState.status === 'showResult' &&
