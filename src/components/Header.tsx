@@ -8,7 +8,7 @@ const lato = Lato({
 
 function Header() {
     return (
-        <div id='header' className={lato.className}>
+        <div id='header' className={lato.className} class="container-fluid">
             <div className="pr-1">
                 <Icon />
             </div>

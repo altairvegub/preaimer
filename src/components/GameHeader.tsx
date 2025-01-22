@@ -22,16 +22,30 @@ function GameHeader({ score, scenario, status, changeGameStatus }: GameHeaderPro
             </div>
             {status === 'idle' ? (
                 <button
-                    className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                    className="w-72 px-5 py-3 bg-blue-500 text-white rounded hover:bg-blue-600"
                     onClick={() => changeGameStatus(gameStatusTransitions[status])}
+                    style={{
+                        zIndex: 1,
+                        position: 'fixed',
+                        bottom: '40px',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                    }}
                 >
                     Start Game
                 </button>
             ) :
                 (
                     <button
-                        className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                        className="w-72 px-5 py-2 bg-red-500 text-white rounded hover:bg-red-600"
                         onClick={() => changeGameStatus(gameStatusTransitions[status])}
+                        style={{
+                            zIndex: 1,
+                            position: 'fixed',
+                            bottom: '40px',
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                        }}
                     >
                         FIRE
                     </button>

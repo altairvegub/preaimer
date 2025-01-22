@@ -47,6 +47,9 @@ function CanvasDrawing({ width, height, onClick, coordinates }: CanvasProps) {
 
     useEffect(() => {
         drawRectangle(coordinates);
+
+        return () => {
+        };
     }, [coordinates]);
 
     return (
@@ -60,7 +63,7 @@ function CanvasDrawing({ width, height, onClick, coordinates }: CanvasProps) {
                     className="border border-slate-800"
                     style={{
                         position: 'absolute',
-                        cursor: 'crosshair'
+                        cursor: 'crosshair',
                     }}
                 />
             </div>

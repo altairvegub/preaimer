@@ -9,7 +9,7 @@ interface GameResultProps {
 function GameResult({ coordinates, onClick }: GameResultProps) {
     return (
         <>
-            <span className="text-white">x {coordinates.x} y {coordinates.y}</span>
+            {/*<span className="text-white">x {coordinates.x} y {coordinates.y}</span>*/}
             <div style={{ position: 'relative', width: '1920px', height: '1080px', overflow: 'hidden' }}>
                 <div style={{
                     position: 'relative',
