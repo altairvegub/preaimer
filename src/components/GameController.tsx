@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import type { MouseEvent } from 'react';
 import GameHeader from './GameHeader';
 import GameGraphics from './GameGraphics';
@@ -9,13 +9,6 @@ type GameState = {
     score: number,
     scenario: number
 }
-
-const gameStatusTransitions: Record<GameStatus, GameStatus> = {
-    idle: 'playing',
-    playing: 'showResult',
-    showResult: 'gameOver',
-    gameOver: 'idle'
-};
 
 const DebugPanel = ({ coordinates, gameState }: { coordinates: Coordinates, gameState: GameState }) => (
     <div className="mt-4 p-4 text-white bg-midnight rounded text-sm">
@@ -45,27 +38,6 @@ function GameController() {
 
         setCoordinates({ x, y });
     }, []);
-
-    const handleSpaceDown = (event: any) => {
-        if (event.key === 'Space') {
-            event.preventDefault();
-            console.log("SPACE");
-        }
-    }
-
-
-    //useEffect(() => {
-    //    const handleKeyDown = (event: any) => {
-    //        if (event.code === "Space") {
-    //        }
-    //    }
-
-    //    window.addEventListener("keydown", handleKeyDown);
-
-    //    return () => {
-    //        window.removeEventListener("keydown", handleKeyDown)
-    //    }
-    //}, [])
 
     //const updateScore = useCallback((points: number) => {
     //    setGameState(prev => ({

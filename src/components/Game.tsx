@@ -23,7 +23,7 @@ function Game({ x, y }: GameProps) {
     return (
         <>
             <div ref={gameImgRef} style={{ width: 2560, overflow: 'hidden' }}>
-                <Image id="myImgId" className="select-none" src={`/screenshots/4k_range.jpg`} alt="angle" width='2560' height='1440' fill={false} style={{ objectFit: "none", overflowX: 'auto' }} />
+                <Image id="myImgId" className="select-none" src={`/screenshots/4k_range.jpg`} alt="angle" width='2560' height='1440' fill={false} style={{ objectFit: "contain", overflowX: 'auto' }} />
             </div>
         </>
     );

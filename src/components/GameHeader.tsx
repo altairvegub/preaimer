@@ -12,6 +12,22 @@ const gameStatusTransitions: Record<GameStatus, GameStatus> = {
     gameOver: 'idle'
 };
 
+const idleButton = () => {
+    <button
+        className="w-72 px-5 py-3 bg-blue-500 text-white rounded hover:bg-blue-600"
+        onClick={() => changeGameStatus(gameStatusTransitions[status])}
+        style={{
+            zIndex: 1,
+            position: 'fixed',
+            bottom: '10rem',
+            left: '50%',
+            transform: 'translateX(-50%)',
+        }}
+    >
+        Start Game
+    </button>
+}
+
 function GameHeader({ score, scenario, status, changeGameStatus }: GameHeaderProps) {
 
     return (
@@ -25,7 +41,7 @@ function GameHeader({ score, scenario, status, changeGameStatus }: GameHeaderPro
                     className="w-72 px-5 py-3 bg-blue-500 text-white rounded hover:bg-blue-600"
                     onClick={() => changeGameStatus(gameStatusTransitions[status])}
                     style={{
-                        zIndex: 1,
+                        zIndex: 2,
                         position: 'fixed',
                         bottom: '10rem',
                         left: '50%',
@@ -40,7 +56,7 @@ function GameHeader({ score, scenario, status, changeGameStatus }: GameHeaderPro
                         className="w-72 px-5 py-3 bg-red-500 text-white rounded hover:bg-red-600"
                         onClick={() => changeGameStatus(gameStatusTransitions[status])}
                         style={{
-                            zIndex: 1,
+                            zIndex: 2,
                             position: 'fixed',
                             bottom: '10rem',
                             left: '50%',

@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { MouseEventHandler, useEffect } from 'react';
+import ResultsOverlay from './ResultsOverlay';
 
 interface GameResultProps {
     coordinates: Coordinates
@@ -13,6 +14,9 @@ function GameResult({ coordinates, onClick }: GameResultProps) {
     return (
         <>
             {/*<span className="text-white">x {coordinates.x} y {coordinates.y}</span>*/}
+            <div>
+                <ResultsOverlay coordinates={coordinates} />
+            </div>
             <div style={{ position: 'relative', width: '1920px', height: '1080px', overflow: 'hidden' }}>
                 <div style={{
                     position: 'relative',
@@ -33,7 +37,9 @@ function GameResult({ coordinates, onClick }: GameResultProps) {
                             width: '1920px',
                             height: '1080px',
                             backgroundPosition: 'center',
-                            animation: `panTransformOrigin 2000ms ease forwards`,
+                            transformOrigin: `${coordinates.x * (1920 / 2560)}px ${coordinates.y * (1080 / 1440)}px`,
+                            //transformOrigin: 'center center',
+                            //animation: `panTransformOrigin 2000ms ease forwards`,
                             transform: 'scale(2.5)',
                             position: 'relative',
                             left: 0,
