@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { MouseEventHandler, useEffect } from 'react';
+import ResultsOverlay from './ResultsOverlay';
 
 interface GameResultProps {
     coordinates: Coordinates
@@ -7,12 +8,16 @@ interface GameResultProps {
 }
 
 function GameResult({ coordinates, onClick }: GameResultProps) {
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [])
     return (
         <>
             {/*<span className="text-white">x {coordinates.x} y {coordinates.y}</span>*/}
+            <div>
+                <ResultsOverlay coordinates={coordinates} />
+            </div>
             <div style={{ position: 'relative', width: '1920px', height: '1080px', overflow: 'hidden' }}>
                 <div style={{
                     position: 'relative',
@@ -21,6 +26,7 @@ function GameResult({ coordinates, onClick }: GameResultProps) {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
+                    overflow: 'visible',
                 }}>
                     <Image
                         //src="/screenshots/ascent_1_peek.png"
@@ -33,28 +39,28 @@ function GameResult({ coordinates, onClick }: GameResultProps) {
                             width: '1920px',
                             height: '1080px',
                             backgroundPosition: 'center',
-                            animation: `panTransformOrigin 2000ms ease forwards`,
-                            transform: 'scale(2.5)',
+                            //transformOrigin: `${2 * (coordinates.x * (1920 / 2560))}px ${2 * (coordinates.y * (1080 / 1440))}px`,
+                            animation: `reversePanTransformOrigin 2000ms ease forwards`,
                             position: 'relative',
                             left: 0,
                             top: 0,
                         }}
                     />
                     <style jsx>{`
-                   @keyframes panTransformOrigin {
-                     0% {
-                       transform-origin: ${coordinates.x * (1920 / 2560)}px ${coordinates.y * (1080 / 1440)}px;
-                     }
-                     25% {
-                       transform-origin: ${coordinates.x * (1920 / 2560)}px ${coordinates.y * (1080 / 1440)}px;
-                     }
-                     100% {
-                       transform-origin: ${960}px ${540}px;
-                     }
-                   }
-                 `}</style>
+        @keyframes reversePanTransformOrigin {
+            0% {
+                transform: translate(${2 * (960 - (coordinates.x) * 1920 / 2560)}px, ${2 * (540 - (coordinates.y) * 1080 / 1440)}px) scale(2);
+            }
+            25% {
+                transform: translate(${2 * (960 - (coordinates.x) * 1920 / 2560)}px, ${2 * (540 - (coordinates.y) * 1080 / 1440)}px) scale(2);
+            }
+            100% {
+                transform: translate(0px, 0px) scale(2);
+            }
+        }
+        `}</style>
                 </div>
-            </div>
+            </div >
         </>
     )
 }
