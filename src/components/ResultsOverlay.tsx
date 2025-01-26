@@ -1,10 +1,12 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 interface ResultsOverlayProps {
     coordinates: Coordinates;
 }
 
 function ResultsOverlay({ coordinates }: ResultsOverlayProps) {
+    const [scale, setScale] = useState(2.5);
+    const [scaleOffset, setScaleOffset] = useState({ x: 0, y: 0 });
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
     const drawRectangle = (coordinates: Coordinates) => {
@@ -14,15 +16,13 @@ function ResultsOverlay({ coordinates }: ResultsOverlayProps) {
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        //coordinates are native (2560 x 1440)
-        //to convert to 1920 x 1080 with a 2.5 scale
-        //do it based off of 1080 midpoint
-        const x = coordinates.x * (1920 / 2560);
-        const y = coordinates.y * (1080 / 1440);
+        const x = (coordinates.x * (1920 / 2560));
+        const y = (coordinates.y * (1080 / 1440));
 
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
         let rectangleSize = 5;
         let color = '#FFFFFF'
+
+        //ctx.scale(2, 2);
 
         //stroke
         ctx.imageSmoothingEnabled = true;
@@ -45,6 +45,9 @@ function ResultsOverlay({ coordinates }: ResultsOverlayProps) {
 
     useEffect(() => {
         drawRectangle(coordinates);
+        setTimeout(() => {
+            drawRectangle({ x: 1280, y: 720 });
+        }, 2000)
 
         return () => {
         };
