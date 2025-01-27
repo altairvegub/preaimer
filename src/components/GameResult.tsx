@@ -8,6 +8,13 @@ interface GameResultProps {
 }
 
 function GameResult({ coordinates, onClick }: GameResultProps) {
+    const imageResolutionX = 2560;
+    const imageResolutionY = 1440;
+    const canvasResolutionX = 1920;
+    const canvasResolutionY = 1080;
+
+    const adjustedX = (canvasResolutionX / 2) - (coordinates.x) * (canvasResolutionX / imageResolutionX);
+    const adjustedY = (canvasResolutionY / 2) - (coordinates.y) * (canvasResolutionY / imageResolutionY);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -39,7 +46,6 @@ function GameResult({ coordinates, onClick }: GameResultProps) {
                             width: '1920px',
                             height: '1080px',
                             backgroundPosition: 'center',
-                            //transformOrigin: `${2 * (coordinates.x * (1920 / 2560))}px ${2 * (coordinates.y * (1080 / 1440))}px`,
                             animation: `reversePanTransformOrigin 2000ms ease forwards`,
                             position: 'relative',
                             left: 0,
@@ -47,18 +53,18 @@ function GameResult({ coordinates, onClick }: GameResultProps) {
                         }}
                     />
                     <style jsx>{`
-        @keyframes reversePanTransformOrigin {
-            0% {
-                transform: translate(${2 * (960 - (coordinates.x) * 1920 / 2560)}px, ${2 * (540 - (coordinates.y) * 1080 / 1440)}px) scale(2);
-            }
-            25% {
-                transform: translate(${2 * (960 - (coordinates.x) * 1920 / 2560)}px, ${2 * (540 - (coordinates.y) * 1080 / 1440)}px) scale(2);
-            }
-            100% {
-                transform: translate(0px, 0px) scale(2);
-            }
-        }
-        `}</style>
+                        @keyframes reversePanTransformOrigin {
+                            0% {
+                                transform: scale(2) translate(${adjustedX}px, ${adjustedY}px);
+                            }
+                            25% {
+                                transform: scale(2) translate(${adjustedX}px, ${adjustedY}px);
+                            }
+                            100% {
+                                transform: scale(2) translate(0px, 0px);
+                            }
+                        }
+                    `}</style>
                 </div>
             </div >
         </>
