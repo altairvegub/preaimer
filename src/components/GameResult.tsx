@@ -8,10 +8,11 @@ interface GameResultProps {
 }
 
 function GameResult({ coordinates, onClick }: GameResultProps) {
+    const scale = 2;
     const imageResolutionX = 2560;
     const imageResolutionY = 1440;
-    const canvasResolutionX = 1920;
-    const canvasResolutionY = 1080;
+    const canvasResolutionX = 3840;
+    const canvasResolutionY = 2160;
 
     const adjustedX = (canvasResolutionX / 2) - (coordinates.x) * (canvasResolutionX / imageResolutionX);
     const adjustedY = (canvasResolutionY / 2) - (coordinates.y) * (canvasResolutionY / imageResolutionY);
@@ -21,9 +22,6 @@ function GameResult({ coordinates, onClick }: GameResultProps) {
     }, [])
     return (
         <>
-            {/*<span className="text-white">x {coordinates.x} y {coordinates.y}</span>*/}
-            <div>
-            </div>
             <div style={{ position: 'relative', width: '1920px', height: '1080px', overflow: 'hidden' }}>
                 <div style={{
                     justifyContent: 'center',
@@ -32,8 +30,8 @@ function GameResult({ coordinates, onClick }: GameResultProps) {
                 }}>
                     <ResultsOverlay coordinates={coordinates} />
                     <Image
-                        src="/screenshots/4k_range.jpg"
-                        //src="/screenshots/ascent_1_peek.png"
+                        //src="/screenshots/4k_range.jpg"
+                        src="/screenshots/ascent_1_peek.png"
                         //src="/screenshots/center.png"
                         alt="Cropped image"
                         width={2560}
@@ -51,13 +49,13 @@ function GameResult({ coordinates, onClick }: GameResultProps) {
                     <style jsx>{`
                         @keyframes reversePanTransformOrigin {
                             0% {
-                                transform: scale(2) translate(${adjustedX}px, ${adjustedY}px);
+                                transform: translate(${adjustedX}px, ${adjustedY}px) scale(2);
                             }
                             25% {
-                                transform: scale(2) translate(${adjustedX}px, ${adjustedY}px);
+                                transform: translate(${adjustedX}px, ${adjustedY}px) scale(2);
                             }
                             100% {
-                                transform: scale(2) translate(0px, 0px);
+                                transform: translate(0px, 0px) scale(2);
                             }
                         }
                     `}</style>

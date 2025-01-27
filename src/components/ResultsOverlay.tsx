@@ -10,16 +10,28 @@ function ResultsOverlay({ coordinates }: ResultsOverlayProps) { // pass native c
 
     const imageResolutionX = 2560;
     const imageResolutionY = 1440;
-    //const canvasResolutionX = 1920;
-    //const canvasResolutionY = 1080;
     const canvasResolutionX = 3840;
     const canvasResolutionY = 2160;
 
-    const adjustedX: number = (canvasResolutionX / 2) - (coordinates.x) * (canvasResolutionX / imageResolutionX);
-    const adjustedY: number = (canvasResolutionY / 2) - (coordinates.y) * (canvasResolutionY / imageResolutionY);
+    const resolutionRatioX = canvasResolutionX / imageResolutionX;
+    const resolutionRatioY = canvasResolutionY / imageResolutionY;
+
+    const adjustedX: number = (canvasResolutionX / 2) - (coordinates.x) * (resolutionRatioX);
+    const adjustedY: number = (canvasResolutionY / 2) - (coordinates.y) * (resolutionRatioY);
 
     const offSetX = coordinates.x - imageResolutionX / 2;
     const offSetY = coordinates.y - imageResolutionY / 2;
+
+    const midPointPos: Coordinates = {
+        x: imageResolutionX / 2,
+        y: imageResolutionY / 2,
+    }
+
+
+    const adjClickedPos: Coordinates = {
+        x: midPointPos.x - offSetX,
+        y: midPointPos.y - offSetY,
+    }
 
     const drawRectangle = (coordinates: Coordinates) => {
         const canvas = canvasRef.current;
@@ -28,8 +40,8 @@ function ResultsOverlay({ coordinates }: ResultsOverlayProps) { // pass native c
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        const x = (coordinates.x * (canvasResolutionX / imageResolutionX));
-        const y = (coordinates.y * (canvasResolutionY / imageResolutionY));
+        const x = (coordinates.x * (resolutionRatioX));
+        const y = (coordinates.y * (resolutionRatioY));
 
         let rectangleSize = 5;
         let color = '#FFFFFF'
@@ -62,40 +74,44 @@ function ResultsOverlay({ coordinates }: ResultsOverlayProps) { // pass native c
 
         ctx.imageSmoothingEnabled = true;
         ctx.lineCap = "round";
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 3;
         ctx.beginPath();
-        ctx.moveTo(startCoord.x * canvasResolutionX / imageResolutionX, startCoord.y * canvasResolutionY / imageResolutionY);
-        ctx.lineTo(endCoord.x * canvasResolutionX / imageResolutionX, endCoord.y * canvasResolutionY / imageResolutionY);
+        ctx.moveTo(startCoord.x * resolutionRatioX, startCoord.y * resolutionRatioX);
+        //ctx.lineTo(endCoord.x * resolutionRatioY, endCoord.y * resolutionRatioY);
+
+        const xSlope = (endCoord.x - startCoord.x) / 100;
+        const ySlope = (endCoord.y - startCoord.y) / 100;
+        let x = (startCoord.x * resolutionRatioX);
+        let y = (startCoord.y * resolutionRatioY);
+
+        let i = 0;
+        const interval = setInterval(() => {
+            x += xSlope;
+            y += ySlope;
+            ctx.lineTo(x, y);
+            ctx.moveTo(x, y);
+            ctx.stroke();
+            i++;
+            if (i >= 150) {
+                clearInterval(interval);
+            }
+        }, 15);
+
+
         ctx.strokeStyle = "white";
         ctx.stroke();
     };
 
-    const adjustCanvas = () => {
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
-
-    };
-
     useEffect(() => {
-        //adjustCanvas();
-        const clickedX = imageResolutionX / 2 - offSetX;
-        const clickedY = imageResolutionY / 2 - offSetY;
-
-        drawRectangle({ x: 1280, y: 720 });
-
-        console.log("offSetX: %s, offSetY: %s", offSetX, offSetY);
-        console.log("X: %s, Y: %s", coordinates.x, coordinates.y);
-        console.log("adjustedX: %s, adjustedY: %s", adjustedX * 2, adjustedY * 2);
-
+        drawRectangle({ x: midPointPos.x, y: midPointPos.y });
         setTimeout(() => {
-            drawRectangle({ x: imageResolutionX / 2 - offSetX, y: imageResolutionY / 2 - offSetY });
-            drawLine({ x: clickedX, y: clickedY }, { x: 1280, y: 720 });
+            drawLine(adjClickedPos, midPointPos);
+            drawRectangle(adjClickedPos);
+            drawRectangle({ x: midPointPos.x, y: midPointPos.y });
         }, 2000)
 
         return () => {
+
         };
     }, []);
 
@@ -115,13 +131,13 @@ function ResultsOverlay({ coordinates }: ResultsOverlayProps) { // pass native c
             <style jsx>{`
                 @keyframes resultsPan {
                     0% {
-                        transform: translate(-960px, -540px);
+                        transform: translate(${-(canvasResolutionX / 2 / 2)}px, ${-(canvasResolutionY / 2 / 2)}px);
                     }
                     25% {
-                        transform: translate(-960px, -540px);
+                        transform: translate(${-(canvasResolutionX / 2 / 2)}px, ${-(canvasResolutionY / 2 / 2)}px);
                     }
                     100% {
-                        transform: translate(${-960 - adjustedX}px, ${-540 - adjustedY}px);
+                        transform: translate(${-(canvasResolutionX / 2 / 2) - adjustedX}px, ${-(canvasResolutionY / 2 / 2) - adjustedY}px);
                     }
                 }
             `}</style>
