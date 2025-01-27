@@ -10,8 +10,10 @@ function ResultsOverlay({ coordinates }: ResultsOverlayProps) { // pass native c
 
     const imageResolutionX = 2560;
     const imageResolutionY = 1440;
-    const canvasResolutionX = 1920;
-    const canvasResolutionY = 1080;
+    //const canvasResolutionX = 1920;
+    //const canvasResolutionY = 1080;
+    const canvasResolutionX = 3840;
+    const canvasResolutionY = 2160;
 
     const adjustedX: number = (canvasResolutionX / 2) - (coordinates.x) * (canvasResolutionX / imageResolutionX);
     const adjustedY: number = (canvasResolutionY / 2) - (coordinates.y) * (canvasResolutionY / imageResolutionY);
@@ -26,12 +28,11 @@ function ResultsOverlay({ coordinates }: ResultsOverlayProps) { // pass native c
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        const x = (coordinates.x * (1920 / 2560));
-        const y = (coordinates.y * (1080 / 1440));
+        const x = (coordinates.x * (canvasResolutionX / imageResolutionX));
+        const y = (coordinates.y * (canvasResolutionY / imageResolutionY));
 
         let rectangleSize = 5;
         let color = '#FFFFFF'
-
 
         //stroke
         ctx.imageSmoothingEnabled = true;
@@ -56,23 +57,32 @@ function ResultsOverlay({ coordinates }: ResultsOverlayProps) { // pass native c
         const canvas = canvasRef.current;
         if (!canvas) return;
 
-
-
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
+        ctx.imageSmoothingEnabled = true;
         ctx.lineCap = "round";
-        ctx.lineWidth = 3;
+        ctx.lineWidth = 2;
         ctx.beginPath();
-        ctx.moveTo(startCoord.x * 1920 / 2560, startCoord.y * 1080 / 1440);
-        ctx.lineTo(endCoord.x * 1920 / 2560, endCoord.y * 1080 / 1440);
+        ctx.moveTo(startCoord.x * canvasResolutionX / imageResolutionX, startCoord.y * canvasResolutionY / imageResolutionY);
+        ctx.lineTo(endCoord.x * canvasResolutionX / imageResolutionX, endCoord.y * canvasResolutionY / imageResolutionY);
         ctx.strokeStyle = "white";
         ctx.stroke();
     };
 
+    const adjustCanvas = () => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+    };
+
     useEffect(() => {
-        const clickedX = 1280 - offSetX * scale;
-        const clickedY = 720 - offSetY * scale;
+        //adjustCanvas();
+        const clickedX = imageResolutionX / 2 - offSetX;
+        const clickedY = imageResolutionY / 2 - offSetY;
 
         drawRectangle({ x: 1280, y: 720 });
 
@@ -81,7 +91,7 @@ function ResultsOverlay({ coordinates }: ResultsOverlayProps) { // pass native c
         console.log("adjustedX: %s, adjustedY: %s", adjustedX * 2, adjustedY * 2);
 
         setTimeout(() => {
-            drawRectangle({ x: 1280 - offSetX * scale, y: 720 - offSetY * scale });
+            drawRectangle({ x: imageResolutionX / 2 - offSetX, y: imageResolutionY / 2 - offSetY });
             drawLine({ x: clickedX, y: clickedY }, { x: 1280, y: 720 });
         }, 2000)
 
@@ -90,12 +100,12 @@ function ResultsOverlay({ coordinates }: ResultsOverlayProps) { // pass native c
     }, []);
 
     return (
-        <div>
+        <div style={{}}>
             <canvas
                 ref={canvasRef}
-                width={1920}
-                height={1080}
-                className="border border-slate-600"
+                width={canvasResolutionX}
+                height={canvasResolutionY}
+                //className="border border-slate-600"
                 style={{
                     position: 'absolute',
                     zIndex: 1,
@@ -105,13 +115,13 @@ function ResultsOverlay({ coordinates }: ResultsOverlayProps) { // pass native c
             <style jsx>{`
                 @keyframes resultsPan {
                     0% {
-                        transform: translate(0px, 0px);
+                        transform: translate(-960px, -540px);
                     }
                     25% {
-                        transform: translate(0px, 0px);
+                        transform: translate(-960px, -540px);
                     }
                     100% {
-                        transform: translate(${-adjustedX * 2}px, ${-adjustedY * 2}px);
+                        transform: translate(${-960 - adjustedX}px, ${-540 - adjustedY}px);
                     }
                 }
             `}</style>
