@@ -23,21 +23,17 @@ function GameResult({ coordinates, onClick }: GameResultProps) {
         <>
             {/*<span className="text-white">x {coordinates.x} y {coordinates.y}</span>*/}
             <div>
-                <ResultsOverlay coordinates={coordinates} />
             </div>
             <div style={{ position: 'relative', width: '1920px', height: '1080px', overflow: 'hidden' }}>
                 <div style={{
-                    position: 'relative',
-                    width: '100%',
-                    height: '100%',
-                    display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
                     overflow: 'visible',
                 }}>
+                    <ResultsOverlay coordinates={coordinates} />
                     <Image
-                        //src="/screenshots/ascent_1_peek.png"
                         src="/screenshots/4k_range.jpg"
+                        //src="/screenshots/ascent_1_peek.png"
                         //src="/screenshots/center.png"
                         alt="Cropped image"
                         width={2560}
