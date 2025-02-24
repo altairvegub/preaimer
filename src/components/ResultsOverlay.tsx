@@ -1,10 +1,19 @@
 import { useRef, useEffect, useState } from 'react';
+import { useGameStore } from './GameController';
 
 interface ResultsOverlayProps {
     coordinates: Coordinates;
 }
 
 function ResultsOverlay({ coordinates }: ResultsOverlayProps) { // pass native coords and draws onto equivalent canvas resolution
+    const scenarios = useGameStore(state => state.scenarios)
+    const scenarioNum = useGameStore(state => state.scenario)
+    let playScenarioPath = '';
+
+    if (scenarioNum > 0 && scenarioNum < scenarios.length) {
+        playScenarioPath = `/screenshots/${scenarios[scenarioNum - 1]}.png`;
+    }
+
     const [scale, setScale] = useState(2);
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -16,8 +25,8 @@ function ResultsOverlay({ coordinates }: ResultsOverlayProps) { // pass native c
     const resolutionRatioX = canvasResolutionX / imageResolutionX;
     const resolutionRatioY = canvasResolutionY / imageResolutionY;
 
-    const adjustedX: number = (canvasResolutionX / 2) - (coordinates.x) * (resolutionRatioX);
-    const adjustedY: number = (canvasResolutionY / 2) - (coordinates.y) * (resolutionRatioY);
+    const adjustedX: number = (canvasResolutionX / scale) - (coordinates.x) * (resolutionRatioX);
+    const adjustedY: number = (canvasResolutionY / scale) - (coordinates.y) * (resolutionRatioY);
 
     const offSetX = coordinates.x - imageResolutionX / 2;
     const offSetY = coordinates.y - imageResolutionY / 2;
@@ -26,7 +35,6 @@ function ResultsOverlay({ coordinates }: ResultsOverlayProps) { // pass native c
         x: imageResolutionX / 2,
         y: imageResolutionY / 2,
     }
-
 
     const adjClickedPos: Coordinates = {
         x: midPointPos.x - offSetX,
@@ -77,27 +85,17 @@ function ResultsOverlay({ coordinates }: ResultsOverlayProps) { // pass native c
         ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.moveTo(startCoord.x * resolutionRatioX, startCoord.y * resolutionRatioX);
-        //ctx.lineTo(endCoord.x * resolutionRatioY, endCoord.y * resolutionRatioY);
+        ctx.lineTo(endCoord.x * resolutionRatioY, endCoord.y * resolutionRatioY);
 
-        const xSlope = (endCoord.x - startCoord.x) / 100;
-        const ySlope = (endCoord.y - startCoord.y) / 100;
-        let x = (startCoord.x * resolutionRatioX);
-        let y = (startCoord.y * resolutionRatioY);
+        //const xSlope = (endCoord.x - startCoord.x) / 10;
+        //const ySlope = (endCoord.y - startCoord.y) / 10;
+        //let x = (startCoord.x * resolutionRatioX);
+        //let y = (startCoord.y * resolutionRatioY);
 
-        let i = 0;
-        const interval = setInterval(() => {
-            x += xSlope;
-            y += ySlope;
-            ctx.lineTo(x, y);
-            ctx.moveTo(x, y);
-            ctx.stroke();
-            i++;
-            if (i >= 150) {
-                clearInterval(interval);
-            }
-        }, 15);
-
-
+        //x += xSlope;
+        //y += ySlope;
+        //ctx.lineTo(x, y);
+        //ctx.moveTo(x, y);
         ctx.strokeStyle = "white";
         ctx.stroke();
     };

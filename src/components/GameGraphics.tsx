@@ -6,15 +6,14 @@ interface GameGraphicsProps {
     width?: number;
     height?: number;
     onClick: MouseEventHandler<HTMLElement>;
-    coordinates: Coordinates;
 }
 
-function GameGraphics({ width, height, onClick, coordinates }: GameGraphicsProps) {
+function GameGraphics({ width, height, onClick }: GameGraphicsProps) {
 
     return (
         <>
-            <CanvasDrawing width={width} height={height} onClick={onClick} coordinates={coordinates} />
-            <Game x={coordinates.x} y={coordinates.y} />
+            <CanvasDrawing width={width} height={height} onClick={onClick} />
+            <Game />
         </>
     );
 }

@@ -1,25 +1,33 @@
 import Image from 'next/image'
-import { MouseEventHandler, useEffect } from 'react';
 import ResultsOverlay from './ResultsOverlay';
+import { useGameStore } from './GameController'
 
 interface GameResultProps {
     coordinates: Coordinates
-    onClick: MouseEventHandler<HTMLElement>;
 }
 
-function GameResult({ coordinates, onClick }: GameResultProps) {
-    const scale = 2;
+function GameResult() {
+    const scenarios = useGameStore(state => state.scenarios)
+    const scenarioNum = useGameStore(state => state.scenario)
+    let resultScenarioPath = '';
+
+    if (scenarioNum > 0 && scenarioNum <= scenarios.length) {
+        resultScenarioPath = `/screenshots/${scenarios[scenarioNum - 1]}_peek.png`;
+    }
+
+    const coordinates = useGameStore(state => state.coordinates);
+    const transformScale = 2;
     const imageResolutionX = 2560;
     const imageResolutionY = 1440;
     const canvasResolutionX = 3840;
     const canvasResolutionY = 2160;
 
-    const adjustedX = (canvasResolutionX / 2) - (coordinates.x) * (canvasResolutionX / imageResolutionX);
-    const adjustedY = (canvasResolutionY / 2) - (coordinates.y) * (canvasResolutionY / imageResolutionY);
+    const adjustedX = (canvasResolutionX / transformScale) - (coordinates.x) * (canvasResolutionX / imageResolutionX);
+    const adjustedY = (canvasResolutionY / transformScale) - (coordinates.y) * (canvasResolutionY / imageResolutionY);
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [])
+    window.scrollTo(0, 0);
+
+
     return (
         <>
             <div style={{ position: 'relative', width: '1920px', height: '1080px', overflow: 'hidden' }}>
@@ -27,11 +35,13 @@ function GameResult({ coordinates, onClick }: GameResultProps) {
                     justifyContent: 'center',
                     alignItems: 'center',
                     overflow: 'visible',
+                    objectFit: 'contain',
                 }}>
                     <ResultsOverlay coordinates={coordinates} />
                     <Image
+                        src={resultScenarioPath}
                         //src="/screenshots/4k_range.jpg"
-                        src="/screenshots/ascent_1_peek.png"
+                        //src=/screenshots/ascent_2_peek.png"
                         //src="/screenshots/center.png"
                         alt="Cropped image"
                         width={2560}

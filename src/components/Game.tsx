@@ -1,13 +1,17 @@
 import Image from 'next/image'
 import { useEffect, useRef } from 'react';
+import { useGameStore } from './GameController';
 
-interface GameProps {
-    x: number;
-    y: number;
-}
-
-function Game({ x, y }: GameProps) {
+function Game() {
     const gameImgRef = useRef<HTMLImageElement>(null);
+    //const playScenarioPath = `/screenshots/ascent_2.png`;
+    const scenarios = useGameStore(state => state.scenarios)
+    const scenarioNum = useGameStore(state => state.scenario)
+    let playScenarioPath = '';
+
+    if (scenarioNum > 0 && scenarioNum <= scenarios.length) {
+        playScenarioPath = `/screenshots/${scenarios[scenarioNum - 1]}.png`;
+    }
 
     useEffect(() => {
         if (gameImgRef.current) {
@@ -22,8 +26,8 @@ function Game({ x, y }: GameProps) {
 
     return (
         <>
-            <div ref={gameImgRef} style={{ width: 2560, overflow: 'hidden' }}>
-                <Image id="myImgId" className="select-none" src={`/screenshots/ascent_1.png`} alt="angle" width='2560' height='1440' fill={false} style={{ objectFit: "contain", overflowX: 'auto' }} />
+            <div ref={gameImgRef} style={{ width: 2560, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyItems: 'center' }}>
+                <Image id="myImgId" className="select-none" src={playScenarioPath} alt="angle" width='2560' height='1440' fill={false} style={{}} />
             </div>
         </>
     );

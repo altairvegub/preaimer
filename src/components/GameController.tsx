@@ -1,14 +1,11 @@
+'use client'
+
 import React, { useState, useCallback } from 'react';
 import type { MouseEvent } from 'react';
-import GameHeader from './GameHeader';
 import GameGraphics from './GameGraphics';
 import GameResult from './GameResult';
-
-type GameState = {
-    status: GameStatus,
-    score: number,
-    scenario: number
-}
+import { create } from 'zustand'
+import GameUserInterface from './GameUserInterface';
 
 const DebugPanel = ({ coordinates, gameState }: { coordinates: Coordinates, gameState: GameState }) => (
     <div className="mt-4 p-4 text-white bg-midnight rounded text-sm">
@@ -18,50 +15,63 @@ const DebugPanel = ({ coordinates, gameState }: { coordinates: Coordinates, game
     </div>
 );
 
+const gameStatusTransitions: Record<GameStatus, GameStatus> = {
+    idle: 'playing',
+    playing: 'showResult',
+    showResult: 'playing', // result to next playing screen flow
+    //showResult: 'gameOver', // result screen to gameover screen flow
+    gameOver: 'idle'
+};
+
+// hard coded values, these will be retrieved from external backend
+const scenarioIds: number[] = [1, 2, 3];
+const scenarios: string[] = ["ascent_1", "ascent_2", "ascent_3"];
+
+const scenarioMap: Record<number, string> = {};
+
+for (let i = 0; i < scenarioIds.length; i++) {
+    scenarioMap[scenarioIds[i]] = scenarios[i];
+}
+
+export const useGameStore = create<GameState>()((set) => ({
+    gameStatus: 'idle',
+    score: 0,
+    scenario: 1,
+    scenarios: scenarios,
+    scenarioId: scenarioIds[0],
+    coordinates: { x: 0, y: 0 },
+    updateNextStatus: () => set((state) => ({ gameStatus: gameStatusTransitions[state.gameStatus] })),
+    updateScore: (newScore: number) => set({ score: newScore }),
+    updateScenario: () => set((state) => ({ scenario: state.scenario + 1 })),
+    updateCoordinates: (newCoordinates: Coordinates) => set({ coordinates: { x: newCoordinates.x, y: newCoordinates.y } }),
+}))
+
 function GameController() {
-    const [gameState, setGameState] = useState<GameState>({
-        status: "idle",
-        score: 0,
-        scenario: 1
-    });
-
-    const handleState = (gameStatus: GameStatus) => {
-        setGameState(prev => ({ ...prev, status: gameStatus }))
-    }
-
-    const [coordinates, setCoordinates] = useState<Coordinates>({ x: -5, y: -5 }); // hide rectangle outside of canvas on initial render
+    const coordinates = useGameStore(state => state.coordinates);
+    const updateCoordinates = useGameStore(state => state.updateCoordinates);
 
     const handleGameClick = useCallback((e: MouseEvent) => {
         const bounds = e.currentTarget.getBoundingClientRect();
         const x = e.clientX - bounds.left;
         const y = e.clientY - bounds.top;
 
-        setCoordinates({ x, y });
+        updateCoordinates({ x: x, y: y });
     }, []);
 
-    //const updateScore = useCallback((points: number) => {
-    //    setGameState(prev => ({
-    //        ...prev,
-    //        score: prev.score + points
-    //    }));
-    //}, []);
+    const gameStatus = useGameStore((state: GameState) => state.gameStatus);
+    const gameState = useGameStore();
 
     return (
         <>
-            <GameHeader
-                score={gameState.score}
-                scenario={gameState.scenario}
-                status={gameState.status}
-                changeGameStatus={handleState}
-            />
-            {gameState.status === 'playing' &&
+            <GameUserInterface />
+            {gameStatus === 'playing' &&
                 <>
-                    <GameGraphics width={2560} height={1440} onClick={handleGameClick} coordinates={coordinates} />
+                    <GameGraphics width={2560} height={1440} onClick={handleGameClick} />
                 </>
             }
-            {gameState.status === 'showResult' &&
+            {gameStatus === 'showResult' &&
                 <div className="flex justify-center min-h-screen">
-                    <GameResult coordinates={coordinates} onClick={handleGameClick} />
+                    <GameResult />
                 </div>
             }
             <DebugPanel coordinates={coordinates} gameState={gameState} />
