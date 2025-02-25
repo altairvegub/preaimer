@@ -1,6 +1,6 @@
 'use client'
 import { useGameStore } from './GameController'
-import Button from './Button'
+import Button, { ColourKey } from './Button'
 
 function GameUserInterface() {
     const outOfBoundsCoords = { x: -5, y: -5 };
@@ -25,15 +25,23 @@ function GameUserInterface() {
 
     }
 
+    let fireBtnColour: ColourKey;
+
+    if (coordinates.x < 0 || coordinates.y < 0) {
+        fireBtnColour = 'disabled'
+    } else {
+        fireBtnColour = 'red'
+    }
+
     return (
         <div className="flex justify-between items-center mb-4 p-4 text-white bg-midnight rounded">
             <div className="flex gap-4">
                 <div>Score: {score}</div>
                 <div>Scenario: {scenario}</div>
             </div>
-            {(gameStatus === 'idle') && <Button colour='blue' label='Play Game' clickHandler={onButtonClick} />}
-            {gameStatus === 'playing' && <Button colour='red' label='FIRE' clickHandler={onButtonClick} />}
-            {gameStatus === 'showResult' && <Button colour='grey' label='CONTINUE' clickHandler={onButtonClick} />}
+            {(gameStatus === 'idle') && <Button colour='green' label='Play Game' clickHandler={onButtonClick} />}
+            {gameStatus === 'playing' && <Button colour={fireBtnColour} label='FIRE' clickHandler={onButtonClick} />}
+            {gameStatus === 'showResult' && <Button colour='green' label='CONTINUE' clickHandler={onButtonClick} />}
         </div>
     );
 }
