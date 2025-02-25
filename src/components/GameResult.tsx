@@ -8,7 +8,7 @@ function GameResult() {
     let resultScenarioPath = '';
 
     if (scenarioNum > 0 && scenarioNum <= scenarios.length) {
-        resultScenarioPath = `/screenshots/${scenarios[scenarioNum - 1]}_peek.png`;
+        resultScenarioPath = `/screenshots/${scenarios[scenarioNum - 1]}_peek.jpg`;
     }
 
     const coordinates = useGameStore(state => state.coordinates);
