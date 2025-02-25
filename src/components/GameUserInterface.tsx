@@ -7,17 +7,22 @@ function GameUserInterface() {
     const score = useGameStore(state => state.score);
     const scenario = useGameStore(state => state.scenario);
     const gameStatus: GameStatus = useGameStore(state => state.gameStatus);
-    const updateStatus = useGameStore(state => state.updateNextStatus);
+    const coordinates = useGameStore(state => state.coordinates);
+    const updateNextStatus = useGameStore(state => state.updateNextStatus);
     const updateScenario = useGameStore(state => state.updateScenario);
     const updateCoordinates = useGameStore(state => state.updateCoordinates);
 
-    function onFireClick() {
-        updateStatus();
+    function onButtonClick() {
+        if ((coordinates.x < 0 || coordinates.y < 0) && gameStatus !== 'idle') {
+            return;
+        }
+        updateNextStatus();
 
         if (gameStatus === 'showResult') {
             updateScenario();
             updateCoordinates(outOfBoundsCoords);
         }
+
     }
 
     return (
@@ -26,9 +31,9 @@ function GameUserInterface() {
                 <div>Score: {score}</div>
                 <div>Scenario: {scenario}</div>
             </div>
-            {(gameStatus === 'idle' || gameStatus === 'gameOver') && <Button colour='blue' label='Play Game' clickHandler={onFireClick} />}
-            {gameStatus === 'playing' && <Button colour='red' label='FIRE' clickHandler={onFireClick} />}
-            {gameStatus === 'showResult' && <Button colour='grey' label='CONTINUE' clickHandler={onFireClick} />}
+            {(gameStatus === 'idle') && <Button colour='blue' label='Play Game' clickHandler={onButtonClick} />}
+            {gameStatus === 'playing' && <Button colour='red' label='FIRE' clickHandler={onButtonClick} />}
+            {gameStatus === 'showResult' && <Button colour='grey' label='CONTINUE' clickHandler={onButtonClick} />}
         </div>
     );
 }

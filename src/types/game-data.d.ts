@@ -16,8 +16,10 @@ interface GameState {
     scenarios: string[],
     scenarioId: number,
     coordinates: Coordinates,
-    updateScore: (score: number) => void,
     updateNextStatus: () => void,
+    updateStatus: (status: GameStatus) => void,
+    updateScore: (score: number) => void,
     updateScenario: () => void,
     updateCoordinates: (coordinates: Coordinates) => void,
+    resetScenario: () => void,
 }

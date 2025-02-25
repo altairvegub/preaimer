@@ -2,10 +2,6 @@ import Image from 'next/image'
 import ResultsOverlay from './ResultsOverlay';
 import { useGameStore } from './GameController'
 
-interface GameResultProps {
-    coordinates: Coordinates
-}
-
 function GameResult() {
     const scenarios = useGameStore(state => state.scenarios)
     const scenarioNum = useGameStore(state => state.scenario)
@@ -27,7 +23,6 @@ function GameResult() {
 
     window.scrollTo(0, 0);
 
-
     return (
         <>
             <div style={{ position: 'relative', width: '1920px', height: '1080px', overflow: 'hidden' }}>
@@ -40,9 +35,6 @@ function GameResult() {
                     <ResultsOverlay coordinates={coordinates} />
                     <Image
                         src={resultScenarioPath}
-                        //src="/screenshots/4k_range.jpg"
-                        //src=/screenshots/ascent_2_peek.png"
-                        //src="/screenshots/center.png"
                         alt="Cropped image"
                         width={2560}
                         height={1440}
@@ -50,7 +42,7 @@ function GameResult() {
                             width: '1920px',
                             height: '1080px',
                             backgroundPosition: 'center',
-                            animation: `reversePanTransformOrigin 2000ms ease forwards`,
+                            animation: `reversePanTransformOrigin 1500ms ease forwards`,
                             position: 'relative',
                             left: 0,
                             top: 0,

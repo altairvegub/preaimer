@@ -1,19 +1,10 @@
 import { useRef, useEffect, useState } from 'react';
-import { useGameStore } from './GameController';
 
 interface ResultsOverlayProps {
     coordinates: Coordinates;
 }
 
 function ResultsOverlay({ coordinates }: ResultsOverlayProps) { // pass native coords and draws onto equivalent canvas resolution
-    const scenarios = useGameStore(state => state.scenarios)
-    const scenarioNum = useGameStore(state => state.scenario)
-    let playScenarioPath = '';
-
-    if (scenarioNum > 0 && scenarioNum < scenarios.length) {
-        playScenarioPath = `/screenshots/${scenarios[scenarioNum - 1]}.png`;
-    }
-
     const [scale, setScale] = useState(2);
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -87,15 +78,6 @@ function ResultsOverlay({ coordinates }: ResultsOverlayProps) { // pass native c
         ctx.moveTo(startCoord.x * resolutionRatioX, startCoord.y * resolutionRatioX);
         ctx.lineTo(endCoord.x * resolutionRatioY, endCoord.y * resolutionRatioY);
 
-        //const xSlope = (endCoord.x - startCoord.x) / 10;
-        //const ySlope = (endCoord.y - startCoord.y) / 10;
-        //let x = (startCoord.x * resolutionRatioX);
-        //let y = (startCoord.y * resolutionRatioY);
-
-        //x += xSlope;
-        //y += ySlope;
-        //ctx.lineTo(x, y);
-        //ctx.moveTo(x, y);
         ctx.strokeStyle = "white";
         ctx.stroke();
     };
@@ -106,7 +88,7 @@ function ResultsOverlay({ coordinates }: ResultsOverlayProps) { // pass native c
             drawLine(adjClickedPos, midPointPos);
             drawRectangle(adjClickedPos);
             drawRectangle({ x: midPointPos.x, y: midPointPos.y });
-        }, 2000)
+        }, 1500)
 
         return () => {
 
@@ -123,7 +105,7 @@ function ResultsOverlay({ coordinates }: ResultsOverlayProps) { // pass native c
                 style={{
                     position: 'absolute',
                     zIndex: 1,
-                    animation: `resultsPan 2000ms ease forwards`,
+                    animation: `resultsPan 1500ms ease forwards`,
                 }}
             />
             <style jsx>{`

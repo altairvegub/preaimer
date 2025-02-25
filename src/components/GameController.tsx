@@ -1,11 +1,12 @@
 'use client'
 
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import type { MouseEvent } from 'react';
 import GameGraphics from './GameGraphics';
 import GameResult from './GameResult';
 import { create } from 'zustand'
 import GameUserInterface from './GameUserInterface';
+import GameFinish from './GameFinish';
 
 const DebugPanel = ({ coordinates, gameState }: { coordinates: Coordinates, gameState: GameState }) => (
     <div className="mt-4 p-4 text-white bg-midnight rounded text-sm">
@@ -24,14 +25,15 @@ const gameStatusTransitions: Record<GameStatus, GameStatus> = {
 };
 
 // hard coded values, these will be retrieved from external backend
-const scenarioIds: number[] = [1, 2, 3];
+const scenarioIds: number[] = [4, 5, 6];
 const scenarios: string[] = ["ascent_1", "ascent_2", "ascent_3"];
-
 const scenarioMap: Record<number, string> = {};
 
 for (let i = 0; i < scenarioIds.length; i++) {
     scenarioMap[scenarioIds[i]] = scenarios[i];
 }
+
+const outOfBoundsCoords = { x: -5, y: -5 };
 
 export const useGameStore = create<GameState>()((set) => ({
     gameStatus: 'idle',
@@ -39,11 +41,13 @@ export const useGameStore = create<GameState>()((set) => ({
     scenario: 1,
     scenarios: scenarios,
     scenarioId: scenarioIds[0],
-    coordinates: { x: 0, y: 0 },
+    coordinates: outOfBoundsCoords,
     updateNextStatus: () => set((state) => ({ gameStatus: gameStatusTransitions[state.gameStatus] })),
+    updateStatus: (newStatus) => set({ gameStatus: newStatus }),
     updateScore: (newScore: number) => set({ score: newScore }),
     updateScenario: () => set((state) => ({ scenario: state.scenario + 1 })),
     updateCoordinates: (newCoordinates: Coordinates) => set({ coordinates: { x: newCoordinates.x, y: newCoordinates.y } }),
+    resetScenario: () => set(() => ({ scenario: 1 })),
 }))
 
 function GameController() {
@@ -65,15 +69,14 @@ function GameController() {
         <>
             <GameUserInterface />
             {gameStatus === 'playing' &&
-                <>
-                    <GameGraphics width={2560} height={1440} onClick={handleGameClick} />
-                </>
+                <GameGraphics width={2560} height={1440} onClick={handleGameClick} />
             }
             {gameStatus === 'showResult' &&
                 <div className="flex justify-center min-h-screen">
                     <GameResult />
                 </div>
             }
+            {gameStatus === 'gameOver' && <GameFinish />}
             <DebugPanel coordinates={coordinates} gameState={gameState} />
         </>
     )

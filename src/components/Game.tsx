@@ -4,13 +4,15 @@ import { useGameStore } from './GameController';
 
 function Game() {
     const gameImgRef = useRef<HTMLImageElement>(null);
-    //const playScenarioPath = `/screenshots/ascent_2.png`;
-    const scenarios = useGameStore(state => state.scenarios)
-    const scenarioNum = useGameStore(state => state.scenario)
+    const scenarios = useGameStore(state => state.scenarios);
+    const scenarioNum = useGameStore(state => state.scenario);
+    const updateStatus = useGameStore(state => state.updateStatus);
     let playScenarioPath = '';
 
     if (scenarioNum > 0 && scenarioNum <= scenarios.length) {
         playScenarioPath = `/screenshots/${scenarios[scenarioNum - 1]}.png`;
+    } else {
+        updateStatus('gameOver');
     }
 
     useEffect(() => {
