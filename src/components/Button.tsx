@@ -18,7 +18,7 @@ function Button({ colour, label, clickHandler }: ButtonProps) {
         disabled: "text-gray-500 bg-gray-400",
     }
 
-    const classes = `w-72 px-5 py-3 rounded font-semibold text-l ${colourClasses[colour]}`
+    const classes = `w-72 py-3 rounded font-semibold text-l ${colourClasses[colour]}`
 
     return (
         <button

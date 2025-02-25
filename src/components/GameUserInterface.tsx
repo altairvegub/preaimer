@@ -1,6 +1,7 @@
 'use client'
 import { useGameStore } from './GameController'
 import Button, { ColourKey } from './Button'
+import Score from './Score';
 
 function GameUserInterface() {
     const outOfBoundsCoords = { x: -5, y: -5 };
@@ -41,7 +42,14 @@ function GameUserInterface() {
             </div>
             {(gameStatus === 'idle') && <Button colour='green' label='Play Game' clickHandler={onButtonClick} />}
             {gameStatus === 'playing' && <Button colour={fireBtnColour} label='FIRE' clickHandler={onButtonClick} />}
-            {gameStatus === 'showResult' && <Button colour='green' label='CONTINUE' clickHandler={onButtonClick} />}
+            {gameStatus === 'showResult' &&
+                <>
+                    <div>
+                        <Score />
+                    </div>
+                    <Button colour='green' label='CONTINUE' clickHandler={onButtonClick} />
+                </>
+            }
         </div>
     );
 }

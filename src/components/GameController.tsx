@@ -44,7 +44,7 @@ export const useGameStore = create<GameState>()((set) => ({
     coordinates: outOfBoundsCoords,
     updateNextStatus: () => set((state) => ({ gameStatus: gameStatusTransitions[state.gameStatus] })),
     updateStatus: (newStatus) => set({ gameStatus: newStatus }),
-    updateScore: (newScore: number) => set({ score: newScore }),
+    updateScore: (newScore: number) => set((state) => ({ score: state.score + newScore })),
     updateScenario: () => set((state) => ({ scenario: state.scenario + 1 })),
     updateCoordinates: (newCoordinates: Coordinates) => set({ coordinates: { x: newCoordinates.x, y: newCoordinates.y } }),
     resetScenario: () => set(() => ({ scenario: 1 })),

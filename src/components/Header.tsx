@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Icon from '../components/Icon'
 import { Lato } from 'next/font/google'
 
@@ -9,10 +10,14 @@ const lato = Lato({
 function Header() {
     return (
         <div id='header' className={`${lato.className} tracking-tight container-fluid`}>
-            <div className="pr-1">
-                <Icon />
-            </div>
-            preaimer
+            <Link href='/' className='flex flex-row'>
+                <div className="pr-1">
+                    <Icon />
+                </div>
+                <div>
+                    preaimer
+                </div>
+            </Link>
         </div>
     )
 }
