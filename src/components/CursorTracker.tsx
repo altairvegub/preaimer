@@ -18,7 +18,6 @@ function CursorTracker() {
     const [position, setPosition] = useState<Coordinate>({ x: 0, y: 0 });
     const [clickPos, setClickPos] = useState<Coordinate>({ x: 0, y: 0 });
     const [imgPos, setImgPos] = useState<ImageCoord>({ xLeft: 0, xRight: 0, yTop: 0, yBottom: 0 })
-    //const targetPos = { x: 1212, y: 686 };
 
     const handleMouseMove = (event: MouseEvent) => {
         setPosition({
@@ -53,7 +52,7 @@ function CursorTracker() {
 
     return (
         <>
-            <Game x={clickPos.x} y={clickPos.y} />
+            <Game />
             <div id='tracker'>
                 <p>Cursor position: {`X: ${position.x}, Y: ${position.y}`}<br />
                     Clicked position: {`X: ${clickPos.x}, Y: ${clickPos.y}`}<br />
