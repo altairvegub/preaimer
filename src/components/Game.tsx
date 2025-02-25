@@ -10,7 +10,7 @@ function Game() {
     let playScenarioPath = '';
 
     if (scenarioNum > 0 && scenarioNum <= scenarios.length) {
-        playScenarioPath = `/screenshots/${scenarios[scenarioNum - 1]}.png`;
+        playScenarioPath = `/screenshots/${scenarios[scenarioNum - 1]}.jpg`;
     } else {
         updateStatus('gameOver');
     }

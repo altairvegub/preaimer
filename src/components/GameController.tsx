@@ -25,8 +25,8 @@ const gameStatusTransitions: Record<GameStatus, GameStatus> = {
 };
 
 // hard coded values, these will be retrieved from external backend
-const scenarioIds: number[] = [4, 5, 6];
-const scenarios: string[] = ["ascent_1", "ascent_2", "ascent_3"];
+const scenarioIds: number[] = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+const scenarios: string[] = ["ascent_1", "ascent_2", "ascent_3", "ascent_4", "ascent_5", "ascent_6", "ascent_7", "ascent_8", "ascent_9", "ascent_10"];
 const scenarioMap: Record<number, string> = {};
 
 for (let i = 0; i < scenarioIds.length; i++) {
