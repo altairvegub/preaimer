@@ -1,15 +1,12 @@
-import { useEffect, useRef } from 'react';
-import type { MouseEventHandler } from 'react';
-import { useGameStore } from './GameController';
+import { MouseEvent, useRef } from 'react';
 
 interface CanvasProps {
     width?: number;
     height?: number;
-    onClick: MouseEventHandler<HTMLElement>;
+    onClick: Function;
 }
 
 function CanvasDrawing({ width, height, onClick }: CanvasProps) {
-    const coordinates = useGameStore(state => state.coordinates)
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
     const drawRectangle = (coordinates: Coordinates) => {
@@ -46,12 +43,10 @@ function CanvasDrawing({ width, height, onClick }: CanvasProps) {
         );
     };
 
-    useEffect(() => {
-        drawRectangle(coordinates);
-
-        return () => {
-        };
-    }, [coordinates]);
+    function onAimClick(event: MouseEvent) {
+        const newCoords = onClick(event);
+        drawRectangle(newCoords);
+    }
 
     return (
         <>
@@ -60,7 +55,7 @@ function CanvasDrawing({ width, height, onClick }: CanvasProps) {
                     ref={canvasRef}
                     width={width}
                     height={height}
-                    onClick={onClick}
+                    onClick={onAimClick}
                     className="border border-slate-800"
                     style={{
                         position: 'absolute',

@@ -1,6 +1,12 @@
 import Image from 'next/image'
-import { useEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import { useGameStore } from './GameController';
+
+function getRandomScrollAmount(min: number, max: number) { // adds variation to prevent users from memorizing the center of the screen
+    const minCeiled = Math.ceil(min);
+    const maxFloored = Math.floor(max);
+    return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
+}
 
 function Game() {
     const gameImgRef = useRef<HTMLImageElement>(null);
@@ -15,14 +21,15 @@ function Game() {
         updateStatus('gameOver');
     }
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (gameImgRef.current) {
             const element = gameImgRef.current;
             const elementRect = element.getBoundingClientRect();
             const absoluteElementTop = elementRect.top + window.scrollY;
             const middle = absoluteElementTop + (elementRect.height / 2) - (window.innerHeight / 2);
+            const scrollTarget = middle + getRandomScrollAmount(-30, 30);
 
-            window.scrollTo(0, middle);
+            window.scrollTo(0, scrollTarget);
         }
     }, [])
 

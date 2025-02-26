@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Home() {
     return (
         <>
-            <div className="h-[calc(100vh-70px)] flex items-center justify-center flex-col gap-10">
+            <div className="h-1/2 flex justify-center items-center flex-col gap-10">
                 <div>
                     <p className='text-white text-6xl tracking-tighter text-center'>
                         <span>how well can you preaim?</span>
@@ -22,10 +22,10 @@ export default function Home() {
                         </button>
                     </Link>
                 </div>
-                <div className='flex flex-row gap-10'>
-                    <Image id='angle' className='overflow-hidden' src='/screenshots/angle.jpeg' alt='landing image' width='400' height='600' />
-                    <Image id='aimed' className='overflow-hidden' src='/screenshots/aimed.jpeg' alt='landing image' width='400' height='600' />
-                    <Image id='result' className='overflow-hidden' src='/screenshots/result.jpeg' alt='landing image' width='400' height='600' />
+                <div className='flex flex-row gap-10 overflow-hidden h-[900px]'>
+                    <div style={{}}>
+                        <Image id='aimed' src='/screenshots/hero.png' alt='landing image' width='1590' height='1000' style={{}} />
+                    </div>
                 </div>
             </div>
         </>

@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useState, useLayoutEffect } from 'react';
 
 interface ResultsOverlayProps {
     coordinates: Coordinates;
@@ -82,7 +82,7 @@ function ResultsOverlay({ coordinates }: ResultsOverlayProps) { // pass native c
         ctx.stroke();
     };
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         drawRectangle({ x: midPointPos.x, y: midPointPos.y });
         setTimeout(() => {
             drawLine(adjClickedPos, midPointPos);

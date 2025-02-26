@@ -54,13 +54,17 @@ function GameController() {
     const coordinates = useGameStore(state => state.coordinates);
     const updateCoordinates = useGameStore(state => state.updateCoordinates);
 
-    const handleGameClick = useCallback((e: MouseEvent) => {
+    function handleGameClick(e: MouseEvent): Coordinates {
         const bounds = e.currentTarget.getBoundingClientRect();
         const x = e.clientX - bounds.left;
         const y = e.clientY - bounds.top;
 
+        const newCoordinates: Coordinates = { x: x, y: y };
+
         updateCoordinates({ x: x, y: y });
-    }, []);
+
+        return newCoordinates;
+    };
 
     const gameStatus = useGameStore((state: GameState) => state.gameStatus);
     const gameState = useGameStore();
@@ -72,7 +76,7 @@ function GameController() {
                 <GameGraphics width={2560} height={1440} onClick={handleGameClick} />
             }
             {gameStatus === 'showResult' &&
-                <div className="flex justify-center min-h-screen">
+                <div className="flex justify-center">
                     <GameResult />
                 </div>
             }
