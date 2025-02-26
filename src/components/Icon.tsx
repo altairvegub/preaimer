@@ -1,17 +1,12 @@
 function Icon() {
     return (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="50"
-            height="50"
-            version="1"
-        >
-            <g stroke="red" strokeWidth="5">
-                <path d="M25 0.5v17z"></path>
-                <path d="M25 32.5v17.5z"></path>
-                <path d="M17.5 25H0z"></path>
-                <path d="M50 25H32.5z"></path>
-                <circle cx="25" cy="25" r="16.5" fill="none"></circle>
+        <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
+            <g>
+                <title>Crosshair</title>
+                <line fill="none" stroke="#90EE90" stroke-width="3" stroke-linecap="round" x1="15" y1="1.5" x2="15" y2="10" />
+                <line fill="none" stroke="#90EE90" stroke-width="3" stroke-linecap="round" x1="15" y1="19" x2="15" y2="28.5" />
+                <line fill="none" stroke="#90EE90" stroke-width="3" stroke-linecap="round" x1="1.5" y1="15" x2="11" y2="15" />
+                <line fill="none" stroke="#90EE90" stroke-width="3" stroke-linecap="round" x1="19" y1="15" x2="28.5" y2="15" />
             </g>
         </svg>
     );

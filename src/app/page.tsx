@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Home() {
     return (
         <>
-            <div className="h-1/2 flex justify-center items-center flex-col gap-10">
+            <div className="flex justify-center items-center flex-col gap-10 mt-[60px]">
                 <div>
                     <p className='text-white text-6xl tracking-tighter text-center'>
                         <span>how well can you preaim?</span>
