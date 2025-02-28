@@ -14,7 +14,6 @@ function calculateScore(coordinates: Coordinates) {
 
 function Score() {
     const coordinates = useGameStore(state => state.coordinates)
-
     const score = calculateScore(coordinates);
 
     return (

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useCallback } from 'react';
+import React from 'react';
 import type { MouseEvent } from 'react';
 import GameGraphics from './GameGraphics';
 import GameResult from './GameResult';
@@ -36,7 +36,7 @@ for (let i = 0; i < scenarioIds.length; i++) {
 const outOfBoundsCoords = { x: -5, y: -5 };
 
 export const useGameStore = create<GameState>()((set) => ({
-    gameStatus: 'idle',
+    gameStatus: 'playing',
     score: 0,
     scenario: 1,
     scenarios: scenarios,

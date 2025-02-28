@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { useLayoutEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useGameStore } from './GameController';
 
 function getRandomScrollAmount(min: number, max: number) { // adds variation to prevent users from memorizing the center of the screen
@@ -14,14 +14,16 @@ function Game() {
     const scenarioNum = useGameStore(state => state.scenario);
     const updateStatus = useGameStore(state => state.updateStatus);
     let playScenarioPath = '';
+    let mapScenarioPath = '';
 
     if (scenarioNum > 0 && scenarioNum <= scenarios.length) {
         playScenarioPath = `/screenshots/${scenarios[scenarioNum - 1]}.jpg`;
+        mapScenarioPath = `/screenshots/${scenarios[scenarioNum - 1]}_map.jpg`;
     } else {
         updateStatus('gameOver');
     }
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (gameImgRef.current) {
             const element = gameImgRef.current;
             const elementRect = element.getBoundingClientRect();

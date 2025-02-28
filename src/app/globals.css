@@ -7,7 +7,6 @@ body > div:first-child,
 div#__next,
 div#__next > div {
   height: 100%;
-  max-width: 100%;
   overflow-x: hidden;
 }
 
@@ -36,7 +35,6 @@ div .game{
   align-items: center;
   padding: 10px;
   padding-left: 20px;
-
 }
 
 @layer utilities {
