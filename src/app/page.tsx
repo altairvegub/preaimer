@@ -25,22 +25,22 @@ export default function Home() {
                             </div>
                             <div>
                                 <Link href='/play'>
-                                    <button className="w-72 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" style={{}}>
+                                    <button className="w-72 py-2 bg-accent text-primary font-bold rounded hover:brightness-[120%]" style={{}}>
                                         Play Game
                                     </button>
                                 </Link>
                             </div>
                         </div>
                     </div>
-                    <div id='leaderboard' className='flex flex-1 items-center justify-center gap-5 text-md'>
+                    <div id='leaderboard' className='flex flex-1 gap-5 text-md'>
                         <Leaderboard />
                     </div>
                     <div >
                     </div>
                 </div>
                 <div className='flex gap-10'>
-                    <div style={{}}>
-                        <Image id='aimed' src='/screenshots/hero.png' alt='landing image' width='1440' height='700' style={{}} />
+                    <div>
+                        <Image id='aimed' className='rounded-xl drop-shadow-xl' src='/screenshots/hero.png' alt='landing image' width='1440' height='700' style={{}} />
                     </div>
                 </div>
             </div>
