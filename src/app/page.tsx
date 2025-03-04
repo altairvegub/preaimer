@@ -9,10 +9,10 @@ export default function Home() {
                 <div className="w-full flex items-center flex-col">
                     <div id="hero" className="p-[70px] space-y-2">
                         <p className='text-white text-6xl tracking-tighter text-center'>
-                            <span>how well can you preaim?</span>
+                            <span>how well can you <span className="text-red-600">preaim</span>?</span>
                         </p>
                         <p className='text-slate-500 font-light text-xl text-center'>
-                            <span>See how your preaim compares to others</span>
+                            <span>See how your crosshair placement compares to others</span>
                         </p>
                     </div>
                 </div>
