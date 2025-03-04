@@ -35,7 +35,7 @@ function Leaderboard() {
                 {/* <h2 className="text-slate-500 text-xl tracking-tighter text-center">Leaderboard</h2> */}
             </div>
             <div className="rounded-lg overflow-hidden drop-shadow-lg">
-                <table className="text-xl w-full table-fixed border-separate border-spacing-0 rounded-lg">
+                <table className="text-xl w-full table-fixed border-separate border-spacing-0 border border-secondary rounded-lg">
                     <thead className="text-left">
                         <tr className="text-lg text-slate-500 bg-secondary">
                             <th className="pt-2 pb-2 font-medium w-1/6 text-center rounded-tl-lg">Rank</th>
