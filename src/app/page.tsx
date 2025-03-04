@@ -25,7 +25,7 @@ export default function Home() {
                             </div>
                             <div>
                                 <Link href='/play'>
-                                    <button className="w-72 py-2 bg-accent text-primary font-bold rounded hover:brightness-[120%]" style={{}}>
+                                    <button className="w-72 py-2 bg-accent text-primary font-semibold rounded hover:brightness-[120%]" style={{}}>
                                         Play Game
                                     </button>
                                 </Link>
