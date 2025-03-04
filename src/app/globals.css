@@ -11,7 +11,7 @@ div#__next > div {
 }
 
 html {
-  background-color: rgb(9,19,31);
+  background-color: theme('colors.primary');
 }
 
 div .game{
@@ -22,14 +22,14 @@ div .game{
 }
 
 .game {
-  background-color: rgb(9, 19, 31);
+  background-color: theme('colors.primary');
   padding: 30px;
 }
 
 #header {
   font-size: 2em;
   color: #FFFFFF;
-  background-color: rgb(9, 19, 31);
+  background-color: theme('colors.primary');
   display: flex;
   justify-content: left;
   align-items: center;
