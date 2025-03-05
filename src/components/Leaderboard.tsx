@@ -30,7 +30,7 @@ function Leaderboard() {
     const topTenPlayers = playerScores.slice(0, leaderboardSize);
 
     return (
-        <div className="w-full pb-2">
+        <div className="w-full pb-6">
             <div className="">
                 {/* <h2 className="text-slate-500 text-xl tracking-tighter text-center">Leaderboard</h2> */}
             </div>
@@ -40,7 +40,7 @@ function Leaderboard() {
                         <tr className="text-lg text-slate-500 bg-secondary">
                             <th className="pt-2 pb-2 font-medium w-1/6 text-center rounded-tl-lg">Rank</th>
                             <th className="pt-2 pb-2 font-medium w-3/6">Player</th>
-                            <th className="pt-2 pb-2 font-medium text-right w-2/6 pr-4">Pixels missed</th>
+                            <th className="pt-2 pb-2 font-medium text-right w-2/6 pr-4">Pixels Missed</th>
                         </tr>
                     </thead>
                     <tbody className="text-white bg-secondary odd:bg-primary">
