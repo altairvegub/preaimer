@@ -15,6 +15,8 @@ function calculateScore(coordinates: Coordinates) {
 function Score() {
     const coordinates = useGameStore(state => state.coordinates)
     const score = calculateScore(coordinates);
+    const midY = 720;
+    const height = Math.abs(720 - coordinates.y);
 
     return (
         <div className='text-3xl p-2'
@@ -31,8 +33,10 @@ function Score() {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-            }}><span style={{ opacity: 1 }}>{score}</span>
+            }}>
+            <span style={{ opacity: 1 }}>{score}</span>
             <span style={{ opacity: 1, fontSize: '1rem', color: 'gray' }}>pixels from target</span>
+            <span className="text-xl">{height}<span className="text-slate-500"> pixels </span>{coordinates.y < midY ? "high" : "low"}</span>
         </div>
     );
 }
