@@ -3,7 +3,7 @@ import Leaderboard from "@/components/Leaderboard";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
-import fetchData from "./lib/fetchData";
+//import fetchData from "./lib/fetchData";
 
 export default function Home() {
 
