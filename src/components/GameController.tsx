@@ -1,5 +1,3 @@
-'use client'
-
 import React from 'react';
 import type { MouseEvent } from 'react';
 import GameGraphics from './GameGraphics';
@@ -65,6 +63,7 @@ function GameController() {
 
         return newCoordinates;
     };
+
 
     const gameStatus = useGameStore((state: GameState) => state.gameStatus);
     const gameState = useGameStore();
