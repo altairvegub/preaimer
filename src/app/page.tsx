@@ -1,12 +1,23 @@
+'use client'
 import Leaderboard from "@/components/Leaderboard";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
+import fetchData from "./lib/fetchData";
 
 export default function Home() {
+
+    let userScores;
+
+    useEffect(() => {
+        //userScores = fetchData();
+    }, [])
+
     return (
         <>
             <div className="max-w-[1200px] mx-auto">
                 <div className="w-full flex items-center flex-col">
+                    <pre className='text-white'>{userScores}</pre>
                     <div id="hero" className="p-[70px] space-y-2">
                         <p className='text-white text-6xl tracking-tighter text-center'>
                             <span>how well can you <span className="text-accent">preaim</span>?</span>
@@ -40,7 +51,7 @@ export default function Home() {
                 </div>
                 <div className='flex gap-10'>
                     <div>
-                        <Image id='aimed' className='rounded-xl drop-shadow-xl' src='/screenshots/hero.png' alt='landing image' width='1440' height='700' style={{}} />
+                        <Image id='aimed' className='rounded-xl drop-shadow-xl' src={`https://${process.env.NEXT_PUBLIC_CDN_DOMAIN}/hero.png`} alt='landing image' width='1440' height='500' style={{}} />
                     </div>
                 </div>
             </div>

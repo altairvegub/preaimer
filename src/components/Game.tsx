@@ -9,6 +9,7 @@ function getRandomScrollAmount(min: number, max: number) { // adds variation to 
 }
 
 function Game() {
+    const r2Url = `https://${process.env.NEXT_PUBLIC_CDN_DOMAIN}/`;
     const gameImgRef = useRef<HTMLImageElement>(null);
     const scenarios = useGameStore(state => state.scenarios);
     const scenarioNum = useGameStore(state => state.scenario);
@@ -17,8 +18,10 @@ function Game() {
     let mapScenarioPath = '';
 
     if (scenarioNum > 0 && scenarioNum <= scenarios.length) {
-        playScenarioPath = `/screenshots/${scenarios[scenarioNum - 1]}.jpg`;
-        mapScenarioPath = `/screenshots/${scenarios[scenarioNum - 1]}_map.jpg`;
+        //playScenarioPath = `/screenshots/${scenarios[scenarioNum - 1]}.jpg`;
+        //mapScenarioPath = `/screenshots/${scenarios[scenarioNum - 1]}_map.jpg`;
+        playScenarioPath = `${r2Url + scenarios[scenarioNum - 1]}.jpg`;
+        mapScenarioPath = `${r2Url + scenarios[scenarioNum - 1]}_map.jpg`;
     } else {
         updateStatus('gameOver');
     }

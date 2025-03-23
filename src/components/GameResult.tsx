@@ -3,12 +3,13 @@ import ResultsOverlay from './ResultsOverlay';
 import { useGameStore } from './GameController'
 
 function GameResult() {
+    const r2Url = `https://${process.env.NEXT_PUBLIC_CDN_DOMAIN}/`
     const scenarios = useGameStore(state => state.scenarios)
     const scenarioNum = useGameStore(state => state.scenario)
     let resultScenarioPath = '';
 
     if (scenarioNum > 0 && scenarioNum <= scenarios.length) {
-        resultScenarioPath = `/screenshots/${scenarios[scenarioNum - 1]}_peek.jpg`;
+        resultScenarioPath = `${r2Url + scenarios[scenarioNum - 1]}_peek.jpg`;
     }
 
     const coordinates = useGameStore(state => state.coordinates);

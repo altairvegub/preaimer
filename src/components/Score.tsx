@@ -34,9 +34,9 @@ function Score() {
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-            <span style={{ opacity: 1 }}>{score}</span>
-            <span style={{ opacity: 1, fontSize: '1rem', color: 'gray' }}>pixels from target</span>
-            <span className="text-xl">{height}<span className="text-slate-500"> pixels </span>{coordinates.y < midY ? "high" : "low"}</span>
+            <span className='text-4xl'>{height}</span>
+            <span className="text-2xl text-slate-400"> pixels {coordinates.y < midY ? "high" : "low"}</span>
+            <span className="text-slate-400 text-lg" ><span className=''>{score}</span> px from target</span>
         </div>
     );
 }

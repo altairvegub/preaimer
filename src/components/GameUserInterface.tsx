@@ -1,4 +1,3 @@
-'use client'
 import { useGameStore } from './GameController'
 import Button, { ColourKey } from './Button'
 import Score from './Score';
