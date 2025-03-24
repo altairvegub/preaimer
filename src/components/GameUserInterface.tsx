@@ -36,7 +36,13 @@ function GameUserInterface() {
     return (
         <div className="flex justify-between items-center mb-4 p-4 text-white bg-midnight rounded">
             {(gameStatus === 'idle') && <Button colour='green' label='Play Game' clickHandler={onButtonClick} />}
-            {gameStatus === 'playing' && <Button colour={fireBtnColour} label='FIRE' clickHandler={onButtonClick} />}
+            {gameStatus === 'playing' &&
+                <>
+                    <div>
+                    </div>
+                    <Button colour={fireBtnColour} label='FIRE' clickHandler={onButtonClick} />
+                </>
+            }
             {gameStatus === 'showResult' &&
                 <>
                     <div>
