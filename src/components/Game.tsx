@@ -18,8 +18,6 @@ function Game() {
     let mapScenarioPath = '';
 
     if (scenarioNum > 0 && scenarioNum <= scenarios.length) {
-        //playScenarioPath = `/screenshots/${scenarios[scenarioNum - 1]}.jpg`;
-        //mapScenarioPath = `/screenshots/${scenarios[scenarioNum - 1]}_map.jpg`;
         playScenarioPath = `${r2Url + scenarios[scenarioNum - 1]}.jpg`;
         mapScenarioPath = `${r2Url + scenarios[scenarioNum - 1]}_map.jpg`;
     } else {

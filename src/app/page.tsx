@@ -44,12 +44,12 @@ export default function Home() {
                         </div>
                     </div>
                     <div id='leaderboard' className='flex flex-1 text-md'>
-                        <Leaderboard />
+                        <Leaderboard size={5} />
                     </div>
                     <div >
                     </div>
                 </div>
-                <div className='flex gap-10'>
+                <div className='flex pt-6'>
                     <div>
                         <Image id='aimed' className='rounded-xl drop-shadow-xl' src={`https://${process.env.NEXT_PUBLIC_CDN_DOMAIN}/hero.png`} alt='landing image' width='1440' height='500' style={{}} />
                     </div>

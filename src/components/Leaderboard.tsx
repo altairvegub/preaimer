@@ -1,5 +1,9 @@
-function Leaderboard() {
-    const leaderboardSize = 6;
+type LeaderboardProps = {
+    size: number,
+};
+
+function Leaderboard({ size }: LeaderboardProps) {
+    const leaderboardSize = size;
 
     interface Player {
         rank: number;
@@ -37,7 +41,7 @@ function Leaderboard() {
             <div className="rounded-lg overflow-hidden drop-shadow-lg">
                 <table className="text-xl w-full table-fixed border-separate border-spacing-0 border border-secondary rounded-lg">
                     <thead className="text-left">
-                        <tr className="text-lg text-slate-500 bg-secondary">
+                        <tr className="text-base text-slate-500 bg-secondary">
                             <th className="pt-2 pb-2 font-medium w-1/6 text-center rounded-tl-lg">Rank</th>
                             <th className="pt-2 pb-2 font-medium w-3/6">Player</th>
                             <th className="pt-2 pb-2 font-medium text-right w-2/6 pr-4">Pixels Missed</th>

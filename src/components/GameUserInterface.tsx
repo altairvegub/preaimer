@@ -9,14 +9,23 @@ function GameUserInterface() {
     const gameStatus: GameStatus = useGameStore(state => state.gameStatus);
     const coordinates = useGameStore(state => state.coordinates);
     const updateNextStatus = useGameStore(state => state.updateNextStatus);
+    const updateStatus = useGameStore(state => state.updateStatus);
     const updateScenario = useGameStore(state => state.updateScenario);
     const updateCoordinates = useGameStore(state => state.updateCoordinates);
+    const numScenarios = 3;
 
     function onButtonClick() {
         if ((coordinates.x < 0 || coordinates.y < 0) && gameStatus !== 'idle') {
             return;
         }
-        updateNextStatus();
+
+        if (gameStatus === 'showResult' && scenario >= numScenarios) {
+            updateStatus('gameOver');
+            return;
+        } else {
+            updateNextStatus();
+        }
+
 
         if (gameStatus === 'showResult') {
             updateScenario();
