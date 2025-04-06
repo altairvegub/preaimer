@@ -43,6 +43,7 @@ function GameResult() {
                             left: 0,
                             top: 0,
                         }}
+                        priority={true}
                     />
                     <style jsx>{`
                         @keyframes reversePanTransformOrigin {

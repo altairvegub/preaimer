@@ -31,12 +31,12 @@ export default function Home() {
                     <div className="flex flex-1 items-center justify-center">
                         <div id='userForm' className='flex flex-col gap-4'>
                             <div>
-                                <input id='username' className='text-xl w-72 px-4 py-2 rounded block' type='text' placeholder='Username' autoComplete="off"></input>
+                                <input id='username' className='text-xl w-72 px-4 py-2 rounded-xl block' type='text' placeholder='Username' autoComplete="off"></input>
                                 {/*<input id='email' className='px-10 py-2 rounded block' type='text' placeholder='Email (optional)'></input>*/}
                             </div>
-                            <div>
+                            <div className='w-full flex justify-center'>
                                 <Link href='/play'>
-                                    <button className="w-72 py-2 bg-accent text-black font-semibold rounded">
+                                    <button className="w-48 py-2 bg-accent text-black font-semibold rounded-xl">
                                         Play
                                     </button>
                                 </Link>

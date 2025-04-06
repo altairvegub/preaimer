@@ -78,6 +78,7 @@ function GameController() {
     const updateCurrScore = useGameStore(state => state.updateCurrScore);
     const updateCurrDistance = useGameStore(state => state.updateCurrDistance);
 
+
     function handleGameClick(e: MouseEvent): Coordinates {
         const bounds = e.currentTarget.getBoundingClientRect();
         const x = e.clientX - bounds.left;

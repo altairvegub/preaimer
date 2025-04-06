@@ -20,10 +20,10 @@ function Button({ colour, label, clickHandler }: ButtonProps) {
         blue: "text-white bg-blue-600",
         slate: "text-white bg-slate-600",
         green: "text-white bg-green-600",
-        disabled: "bg-gray-400",
+        disabled: "text-gray-500 bg-gray-400",
     }
 
-    const classes = `w-72 py-3 rounded font-semibold text-l ${colourClasses[colour]}`
+    const classes = `w-72 py-3 rounded-xl font-semibold text-l ${colourClasses[colour]}`
 
     return (
         <button

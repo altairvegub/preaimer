@@ -18,7 +18,7 @@ function GamePlayOverlay() {
                 <span className='text-lg text-slate-300 tracking-tight'> Scenario </span>
                 <span className='text-3xl tracking-wider'>{numScenario}/{3}</span>
                 <button
-                    className='w-48 py-2 rounded font-semibold text-l text-white bg-slate-500'
+                    className='w-48 py-2 rounded-lg font-semibold text-l text-white bg-slate-500'
                     onClick={onButtonClick}
                 >
                     View target on map
