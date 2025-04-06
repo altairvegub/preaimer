@@ -17,8 +17,7 @@ const DebugPanel = ({ coordinates, gameState }: { coordinates: Coordinates, game
 const gameStatusTransitions: Record<GameStatus, GameStatus> = {
     idle: 'playing',
     playing: 'showResult',
-    showResult: 'playing', // result to next playing screen flow
-    //showResult: 'gameOver', // result screen to gameover screen flow
+    showResult: 'playing',
     gameOver: 'idle'
 };
 
@@ -34,23 +33,50 @@ for (let i = 0; i < scenarioIds.length; i++) {
 const outOfBoundsCoords = { x: -5, y: -5 };
 
 export const useGameStore = create<GameState>()((set) => ({
+    username: 'guest',
     gameStatus: 'playing',
-    score: 0,
+    currScore: 0,
+    currDistance: 0,
+    totalScore: 0,
     scenario: 1,
     scenarios: scenarios,
     scenarioId: scenarioIds[0],
     coordinates: outOfBoundsCoords,
+    updateUsername: (newUsername) => set({ username: newUsername }),
     updateNextStatus: () => set((state) => ({ gameStatus: gameStatusTransitions[state.gameStatus] })),
     updateStatus: (newStatus) => set({ gameStatus: newStatus }),
-    updateScore: (newScore: number) => set((state) => ({ score: state.score + newScore })),
+    updateCurrScore: (newCurrScore) => set({ currScore: newCurrScore }),
+    updateCurrDistance: (newCurrDist) => set({ currDistance: newCurrDist }),
+    updateTotalScore: (newScore: number) => set((state) => ({ totalScore: state.totalScore + newScore })),
     updateScenario: () => set((state) => ({ scenario: state.scenario + 1 })),
     updateCoordinates: (newCoordinates: Coordinates) => set({ coordinates: { x: newCoordinates.x, y: newCoordinates.y } }),
     resetScenario: () => set(() => ({ scenario: 1 })),
 }))
 
+function calculateDistance(coordinates: Coordinates) {
+    const midX = 1280;
+    const midY = 720;
+
+    const x = coordinates.x;
+    const y = coordinates.y;
+
+    const score = Math.round(Math.sqrt(Math.pow((x - midX), 2) + Math.pow((y - midY), 2))) //distance formula of click to mid-point (target)
+
+    return score;
+}
+
+function calculateHeight(coordinates: Coordinates) {
+    const midYCoord = 720;
+    const height = Math.abs(midYCoord - coordinates.y);
+
+    return height;
+}
+
 function GameController() {
     const coordinates = useGameStore(state => state.coordinates);
     const updateCoordinates = useGameStore(state => state.updateCoordinates);
+    const updateCurrScore = useGameStore(state => state.updateCurrScore);
+    const updateCurrDistance = useGameStore(state => state.updateCurrDistance);
 
     function handleGameClick(e: MouseEvent): Coordinates {
         const bounds = e.currentTarget.getBoundingClientRect();
@@ -60,10 +86,11 @@ function GameController() {
         const newCoordinates: Coordinates = { x: x, y: y };
 
         updateCoordinates({ x: x, y: y });
+        updateCurrScore(calculateHeight(newCoordinates));
+        updateCurrDistance(calculateDistance(newCoordinates));
 
         return newCoordinates;
     };
-
 
     const gameStatus = useGameStore((state: GameState) => state.gameStatus);
     const gameState = useGameStore();

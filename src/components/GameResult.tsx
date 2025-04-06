@@ -26,13 +26,8 @@ function GameResult() {
 
     return (
         <>
-            <div style={{ position: 'relative', width: '1920px', height: '1080px', overflow: 'hidden' }}>
-                <div style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    overflow: 'visible',
-                    objectFit: 'contain',
-                }}>
+            <div className='rounded-xl' style={{ position: 'relative', width: '1920px', height: '1080px', overflow: 'hidden' }}>
+                <div className='justify-center items-center overflow-visible object-contain'>
                     <ResultsOverlay coordinates={coordinates} />
                     <Image
                         src={resultScenarioPath}

@@ -15,7 +15,7 @@ function GameFinish() {
         <>
             <div className='flex flex-row justify-center'>
                 <div className='w-1/2'>
-                    <h1 className='text-3xl tracking-tighter text-white'> Leaderboard</h1>
+                    <h1 className='text-3xl tracking-tighter text-white mb-3'> Leaderboard</h1>
                     <Leaderboard size={20} />
                 </div>
                 <Button colour="blue" label="Play Again" clickHandler={onPlayAgainClick} />

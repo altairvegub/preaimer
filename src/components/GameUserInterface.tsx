@@ -1,10 +1,10 @@
 import { useGameStore } from './GameController'
 import Button, { ColourKey } from './Button'
 import Score from './Score';
+import GamePlayOverlay from './GamePlayOverlay';
 
 function GameUserInterface() {
     const outOfBoundsCoords = { x: -5, y: -5 };
-    const score = useGameStore(state => state.score);
     const scenario = useGameStore(state => state.scenario);
     const gameStatus: GameStatus = useGameStore(state => state.gameStatus);
     const coordinates = useGameStore(state => state.coordinates);
@@ -19,13 +19,13 @@ function GameUserInterface() {
             return;
         }
 
+        // result screen into next scenario or game over screen
         if (gameStatus === 'showResult' && scenario >= numScenarios) {
             updateStatus('gameOver');
             return;
         } else {
             updateNextStatus();
         }
-
 
         if (gameStatus === 'showResult') {
             updateScenario();
@@ -48,8 +48,11 @@ function GameUserInterface() {
             {gameStatus === 'playing' &&
                 <>
                     <div>
+                        <GamePlayOverlay />
                     </div>
-                    <Button colour={fireBtnColour} label='FIRE' clickHandler={onButtonClick} />
+                    <div className='flex justify-center w-full'>
+                        <Button colour={fireBtnColour} label='FIRE' clickHandler={onButtonClick} />
+                    </div>
                 </>
             }
             {gameStatus === 'showResult' &&
@@ -57,10 +60,12 @@ function GameUserInterface() {
                     <div>
                         <Score />
                     </div>
-                    <Button colour='green' label='CONTINUE' clickHandler={onButtonClick} />
+                    <div className='flex justify-center w-full'>
+                        <Button colour='green' label='CONTINUE' clickHandler={onButtonClick} />
+                    </div>
                 </>
             }
-        </div>
+        </div >
     );
 }
 

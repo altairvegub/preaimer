@@ -29,15 +29,15 @@ export default function Home() {
                 </div>
                 <div className="flex flex-row">
                     <div className="flex flex-1 items-center justify-center">
-                        <div id='userForm' className='text-md flex flex-col gap-4'>
+                        <div id='userForm' className='flex flex-col gap-4'>
                             <div>
-                                <input id='username' className='w-72 px-4 py-2 rounded block' type='text' placeholder='Username'></input>
+                                <input id='username' className='text-xl w-72 px-4 py-2 rounded block' type='text' placeholder='Username' autoComplete="off"></input>
                                 {/*<input id='email' className='px-10 py-2 rounded block' type='text' placeholder='Email (optional)'></input>*/}
                             </div>
                             <div>
                                 <Link href='/play'>
-                                    <button className="w-72 py-2 bg-accent text-black font-semibold rounded hover:brightness-[120%]" style={{}}>
-                                        Play Game
+                                    <button className="w-72 py-2 bg-accent text-black font-semibold rounded">
+                                        Play
                                     </button>
                                 </Link>
                             </div>
@@ -49,7 +49,7 @@ export default function Home() {
                     <div >
                     </div>
                 </div>
-                <div className='flex pt-6'>
+                <div className='flex mt-6'>
                     <div>
                         <Image id='aimed' className='rounded-xl drop-shadow-xl' src={`https://${process.env.NEXT_PUBLIC_CDN_DOMAIN}/hero.png`} alt='landing image' width='1440' height='500' style={{}} />
                     </div>
