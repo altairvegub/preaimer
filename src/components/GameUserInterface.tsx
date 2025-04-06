@@ -13,7 +13,7 @@ function GameUserInterface() {
     const updateStatus = useGameStore(state => state.updateStatus);
     const updateScenario = useGameStore(state => state.updateScenario);
     const updateCoordinates = useGameStore(state => state.updateCoordinates);
-    const numScenarios = 5;
+    const numScenarios = 3;
 
     function onButtonClick() {
         if ((coordinates.x < 0 || coordinates.y < 0) && gameStatus !== 'idle') {
@@ -64,7 +64,6 @@ function GameUserInterface() {
         <>
             <Head>
                 {imgsToPreload.map((url, index) => {
-                    console.log(`Adding preload for: ${url}`);
                     return (
                         <link
                             key={index}
