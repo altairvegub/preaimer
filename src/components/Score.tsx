@@ -16,7 +16,7 @@ function Score() {
                 borderRadius: '8px',
                 width: '16rem',
             }}>
-            <span className='text-4xl'>{currScore}</span>
+            <span className='text-4xl'>{Math.round(currScore)}</span>
             <span className="text-2xl text-slate-400"> pixels {coordinates.y < currScore ? "high" : "low"}</span>
             <span className="text-slate-400 text-lg" ><span className=''>{currDistance}</span> px from target</span>
         </div>

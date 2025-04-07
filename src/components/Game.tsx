@@ -38,8 +38,8 @@ function Game() {
 
     return (
         <>
-            <div ref={gameImgRef} style={{ width: 2560, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyItems: 'center' }}>
-                <Image id="gameImageId" className="select-none" src={playScenarioPath} alt="angle" width='2560' height='1440' fill={false} style={{}} />
+            <div ref={gameImgRef} style={{ width: 2560 }}>
+                <Image id="gameImageId" className="select-none" src={playScenarioPath} alt="angle" width='2560' height='1440' style={{ width: '100%', height: '100%' }} />
             </div>
         </>
     );

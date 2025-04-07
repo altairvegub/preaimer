@@ -2,22 +2,12 @@
 import Leaderboard from "@/components/Leaderboard";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
-//import fetchData from "./lib/fetchData";
 
 export default function Home() {
-
-    let userScores;
-
-    useEffect(() => {
-        //userScores = fetchData();
-    }, [])
-
     return (
         <>
             <div className="max-w-[1200px] mx-auto">
                 <div className="w-full flex items-center flex-col">
-                    <pre className='text-white'>{userScores}</pre>
                     <div id="hero" className="p-[70px] space-y-2">
                         <p className='text-white text-6xl tracking-tighter text-center'>
                             <span>how well can you <span className="text-accent">preaim</span>?</span>

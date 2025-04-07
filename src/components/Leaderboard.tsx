@@ -1,8 +1,18 @@
+import fetchData from "@/app/lib/fetchData";
+import { useEffect } from "react";
+
 type LeaderboardProps = {
     size: number,
 };
 
 function Leaderboard({ size }: LeaderboardProps) {
+    let userScores;
+
+    useEffect(() => {
+        userScores = fetchData();
+        //console.log(userScores);
+    }, [])
+
     const leaderboardSize = size;
 
     interface Player {
@@ -34,31 +44,34 @@ function Leaderboard({ size }: LeaderboardProps) {
     const topTenPlayers = playerScores.slice(0, leaderboardSize);
 
     return (
-        <div className="w-full pb-6">
-            <div className="">
-                {/* <h2 className="text-slate-500 text-xl tracking-tighter text-center">Leaderboard</h2> */}
-            </div>
-            <div className="rounded-lg overflow-hidden drop-shadow-lg">
-                <table className="text-xl w-full table-fixed border-separate border-spacing-0 border border-secondary rounded-lg">
-                    <thead className="text-left">
-                        <tr className="text-base text-slate-500 bg-secondary">
-                            <th className="pt-2 pb-2 font-medium w-1/6 text-center rounded-tl-lg">Rank</th>
-                            <th className="pt-2 pb-2 font-medium w-3/6">Player</th>
-                            <th className="pt-2 pb-2 font-medium text-right w-2/6 pr-4">Pixels Missed</th>
-                        </tr>
-                    </thead>
-                    <tbody className="text-white bg-secondary odd:bg-primary">
-                        {topTenPlayers.map((player: Player, index: number) => (
-                            <tr key={player.rank} className={index % 2 === 0 ? 'bg-primary' : 'bg-secondary'}>
-                                <td className="pt-2 pb-2 text-center">{player.rank}</td>
-                                <td className="pt-2 pb-2 text-xl tracking-tight">{player.name}</td>
-                                <td className="pt-2 pb-2 text-right pr-4">{player.pixels}</td>
+        <>
+            <div className="w-full pb-6">
+                <div className="">
+                    <pre>{userScores}</pre>
+                    {/* <h2 className="text-slate-500 text-xl tracking-tighter text-center">Leaderboard</h2> */}
+                </div>
+                <div className="rounded-lg overflow-hidden drop-shadow-lg">
+                    <table className="text-xl w-full table-fixed border-separate border-spacing-0 border border-secondary rounded-lg">
+                        <thead className="text-left">
+                            <tr className="text-base text-slate-500 bg-secondary">
+                                <th className="pt-2 pb-2 font-medium w-1/6 text-center rounded-tl-lg">Rank</th>
+                                <th className="pt-2 pb-2 font-medium w-3/6">Player</th>
+                                <th className="pt-2 pb-2 font-medium text-right w-2/6 pr-4">Pixels Missed</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-        </div >
+                        </thead>
+                        <tbody className="text-white bg-secondary odd:bg-primary">
+                            {topTenPlayers.map((player: Player, index: number) => (
+                                <tr key={player.rank} className={index % 2 === 0 ? 'bg-primary' : 'bg-secondary'}>
+                                    <td className="pt-2 pb-2 text-center">{player.rank}</td>
+                                    <td className="pt-2 pb-2 text-xl tracking-tight">{player.name}</td>
+                                    <td className="pt-2 pb-2 text-right pr-4">{player.pixels}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div >
+        </>
     )
 }
 

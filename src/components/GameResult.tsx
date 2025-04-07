@@ -26,8 +26,8 @@ function GameResult() {
 
     return (
         <>
-            <div className='rounded-xl' style={{ position: 'relative', width: '1920px', height: '1080px', overflow: 'hidden' }}>
-                <div className='justify-center items-center overflow-visible object-contain'>
+            <div className='flex rounded-xl'>
+                <div className='rounded-xl relative justify-center items-center overflow-hidden w-[1920px] h-[1080px]'>
                     <ResultsOverlay coordinates={coordinates} />
                     <Image
                         src={resultScenarioPath}
@@ -35,9 +35,10 @@ function GameResult() {
                         width={2560}
                         height={1440}
                         style={{
-                            width: '1920px',
-                            height: '1080px',
+                            width: '100%',
+                            height: '100%',
                             backgroundPosition: 'center',
+                            objectPosition: 'center',
                             animation: `reversePanTransformOrigin 1500ms ease forwards`,
                             position: 'relative',
                             left: 0,
