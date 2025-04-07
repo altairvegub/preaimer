@@ -27,7 +27,7 @@ function Button({ colour, label, clickHandler }: ButtonProps) {
 
     return (
         <button
-            className={`${classes} z-10 fixed bottom-40`}
+            className={`${classes} fixed z-20 bottom-40`}
             onClick={clickHandler}
             disabled={colour === 'disabled'}
         >
