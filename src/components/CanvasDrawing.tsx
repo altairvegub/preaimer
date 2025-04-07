@@ -50,19 +50,17 @@ function CanvasDrawing({ width, height, onClick }: CanvasProps) {
 
     return (
         <>
-            <div>
-                <canvas
-                    ref={canvasRef}
-                    width={width}
-                    height={height}
-                    onClick={onAimClick}
-                    className="border border-slate-800"
-                    style={{
-                        position: 'absolute',
-                        cursor: 'crosshair',
-                    }}
-                />
-            </div>
+            <canvas
+                ref={canvasRef}
+                width={width}
+                height={height}
+                onClick={onAimClick}
+                className="border border-slate-800"
+                style={{
+                    position: 'absolute',
+                    cursor: 'crosshair',
+                }}
+            />
         </>
     );
 };

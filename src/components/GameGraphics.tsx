@@ -12,8 +12,8 @@ function GameGraphics({ width, height, onClick }: GameGraphicsProps) {
 
     return (
         <>
-            <div className='m-auto'>
-                <div className="overflow-hidden w-[2560px] h-[1440px]">
+            <div className='flex justify-center'>
+                <div className="rounded-xl w-[2560px] h-[1440px]">
                     <CanvasDrawing width={width} height={height} onClick={onClick} />
                     <Game />
                 </div>
