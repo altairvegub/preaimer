@@ -17,7 +17,7 @@ export default function Home() {
                         </p>
                     </div>
                 </div>
-                <div className="flex flex-row">
+                <div className="flex md:flex-row flex-col gap-6">
                     <div className="flex flex-1 items-center justify-center">
                         <div id='userForm' className='flex flex-col gap-4'>
                             <div>
