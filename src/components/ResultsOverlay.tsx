@@ -1,46 +1,64 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useEffect, useCallback, useMemo } from 'react';
 
 interface ResultsOverlayProps {
     coordinates: Coordinates;
 }
 
 function ResultsOverlay({ coordinates }: ResultsOverlayProps) { // pass native coords and draws onto equivalent canvas resolution
-    const [scale, setScale] = useState(2);
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-    const imageResolutionX = 2560;
-    const imageResolutionY = 1440;
-    const canvasResolutionX = 3840;
-    const canvasResolutionY = 2160;
+    const scale = 2;
 
-    const resolutionRatioX = canvasResolutionX / imageResolutionX;
-    const resolutionRatioY = canvasResolutionY / imageResolutionY;
+    const imageResolution: Coordinates = useMemo(() => {
+        return {
+            x: 2560,
+            y: 1440,
+        }
+    }, []);
 
-    const adjustedX: number = (canvasResolutionX / scale) - (coordinates.x) * (resolutionRatioX);
-    const adjustedY: number = (canvasResolutionY / scale) - (coordinates.y) * (resolutionRatioY);
-
-    const offSetX = coordinates.x - imageResolutionX / 2;
-    const offSetY = coordinates.y - imageResolutionY / 2;
-
-    const midPointPos: Coordinates = {
-        x: imageResolutionX / 2,
-        y: imageResolutionY / 2,
+    const canvasResolution: Coordinates = {
+        x: 3840,
+        y: 2160,
     }
 
-    const adjClickedPos: Coordinates = {
-        x: midPointPos.x - offSetX,
-        y: midPointPos.y - offSetY,
+    const resolutionRatio = canvasResolution.x / imageResolution.x;
+
+    const adjustedCoordinates: Coordinates = {
+        x: (canvasResolution.x / scale) - (coordinates.x) * (resolutionRatio),
+        y: (canvasResolution.y / scale) - (coordinates.y) * (resolutionRatio),
+
     }
 
-    const drawRectangle = (coordinates: Coordinates) => {
+    const offSet: Coordinates = useMemo(() => {
+        return {
+            x: coordinates.x - imageResolution.x / 2,
+            y: coordinates.y - imageResolution.y / 2,
+        }
+    }, [coordinates, imageResolution]);
+
+    const midPointPos: Coordinates = useMemo(() => {
+        return {
+            x: imageResolution.x / 2,
+            y: imageResolution.y / 2,
+        }
+    }, [imageResolution]);
+
+    const adjClickedPos: Coordinates = useMemo(() => {
+        return {
+            x: midPointPos.x - offSet.x,
+            y: midPointPos.y - offSet.y,
+        }
+    }, [midPointPos, offSet])
+
+    const drawRectangle = useCallback((coordinates: Coordinates) => {
         const canvas = canvasRef.current;
         if (!canvas) return;
 
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        const x = (coordinates.x * (resolutionRatioX));
-        const y = (coordinates.y * (resolutionRatioY));
+        const x = (coordinates.x * (resolutionRatio));
+        const y = (coordinates.y * (resolutionRatio));
 
         let rectangleSize = 5;
         let color = '#FFFFFF'
@@ -62,9 +80,9 @@ function ResultsOverlay({ coordinates }: ResultsOverlayProps) { // pass native c
             rectangleSize,
             rectangleSize
         );
-    };
+    }, [resolutionRatio]);
 
-    const drawLine = (startCoord: Coordinates, endCoord: Coordinates) => {
+    const drawLine = useCallback((startCoord: Coordinates, endCoord: Coordinates) => {
         const canvas = canvasRef.current;
         if (!canvas) return;
 
@@ -75,12 +93,12 @@ function ResultsOverlay({ coordinates }: ResultsOverlayProps) { // pass native c
         ctx.lineCap = "round";
         ctx.lineWidth = 3;
         ctx.beginPath();
-        ctx.moveTo(startCoord.x * resolutionRatioX, startCoord.y * resolutionRatioX);
-        ctx.lineTo(endCoord.x * resolutionRatioY, endCoord.y * resolutionRatioY);
+        ctx.moveTo(startCoord.x * resolutionRatio, startCoord.y * resolutionRatio);
+        ctx.lineTo(endCoord.x * resolutionRatio, endCoord.y * resolutionRatio);
 
         ctx.strokeStyle = "white";
         ctx.stroke();
-    };
+    }, [resolutionRatio]);
 
     useEffect(() => {
         drawRectangle({ x: midPointPos.x, y: midPointPos.y });
@@ -92,15 +110,14 @@ function ResultsOverlay({ coordinates }: ResultsOverlayProps) { // pass native c
 
         return () => {
         };
-    }, []);
+    }, [drawLine, drawRectangle, adjClickedPos, midPointPos]);
 
     return (
         <div style={{}}>
             <canvas
                 ref={canvasRef}
-                width={canvasResolutionX}
-                height={canvasResolutionY}
-                //className="border border-slate-600"
+                width={canvasResolution.x}
+                height={canvasResolution.y}
                 style={{
                     position: 'absolute',
                     zIndex: 1,
@@ -110,13 +127,13 @@ function ResultsOverlay({ coordinates }: ResultsOverlayProps) { // pass native c
             <style jsx>{`
                 @keyframes resultsPan {
                     0% {
-                        transform: translate(${-(canvasResolutionX / 2 / 2)}px, ${-(canvasResolutionY / 2 / 2)}px);
+                        transform: translate(${-(canvasResolution.x / 2 / 2)}px, ${-(canvasResolution.y / 2 / 2)}px);
                     }
                     25% {
-                        transform: translate(${-(canvasResolutionX / 2 / 2)}px, ${-(canvasResolutionY / 2 / 2)}px);
+                        transform: translate(${-(canvasResolution.x / 2 / 2)}px, ${-(canvasResolution.y / 2 / 2)}px);
                     }
                     100% {
-                        transform: translate(${-(canvasResolutionX / 2 / 2) - adjustedX}px, ${-(canvasResolutionY / 2 / 2) - adjustedY}px);
+                        transform: translate(${-(canvasResolution.x / 2 / 2) - adjustedCoordinates.x}px, ${-(canvasResolution.y / 2 / 2) - adjustedCoordinates.y}px);
                     }
                 }
             `}</style>

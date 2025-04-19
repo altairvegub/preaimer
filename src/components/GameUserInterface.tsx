@@ -1,7 +1,7 @@
 import { useGameStore } from './GameController'
 import Button, { ColourKey } from './Button'
 import Score from './Score';
-import GamePlayOverlay from './GamePlayOverlay';
+import GameplayOverlay from './GameplayOverlay';
 import Head from 'next/head';
 
 function GameUserInterface() {
@@ -80,7 +80,7 @@ function GameUserInterface() {
                 {gameStatus === 'playing' &&
                     <>
                         <div>
-                            <GamePlayOverlay />
+                            <GameplayOverlay />
                         </div>
                         <div className='flex justify-center w-full'>
                             <Button colour={fireBtnColour} label='FIRE' clickHandler={onButtonClick} />

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useGameStore } from "./GameController";
 import Image from "next/image";
 
-function GamePlayOverlay() {
+function GameplayOverlay() {
     const [toggleMap, setToggleMap] = useState(false)
     const scenarios = useGameStore(state => state.scenarios);
     const scenarioNum = useGameStore(state => state.scenario);
@@ -35,4 +35,4 @@ function GamePlayOverlay() {
     )
 }
 
-export default GamePlayOverlay;
+export default GameplayOverlay;

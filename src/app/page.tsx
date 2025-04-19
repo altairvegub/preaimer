@@ -36,7 +36,7 @@ export default function Home() {
                     </div>
                     <div id='leaderboard' className='flex flex-1 text-md'>
                         <div>
-                            <h1 className='text-xl tracking-tight text-slate-500 mb-1'>Today's Leaderboard</h1>
+                            <h1 className='text-xl tracking-tight text-slate-500 mb-1'>Today&apos;s Leaderboard</h1>
                             <Leaderboard size={5} />
                         </div>
                     </div>
