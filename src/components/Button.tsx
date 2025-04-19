@@ -27,7 +27,7 @@ function Button({ colour, label, clickHandler }: ButtonProps) {
 
     return (
         <button
-            className={`${classes} fixed z-20 bottom-40`}
+            className={`${classes} fixed z-20 bottom-40 pb-[calc(1rem_+_env(safe-area-inset-bottom))]`}
             onClick={clickHandler}
             disabled={colour === 'disabled'}
         >

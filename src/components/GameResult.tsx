@@ -22,8 +22,6 @@ function GameResult() {
     const adjustedX = (canvasResolutionX / transformScale) - (coordinates.x) * (canvasResolutionX / imageResolutionX);
     const adjustedY = (canvasResolutionY / transformScale) - (coordinates.y) * (canvasResolutionY / imageResolutionY);
 
-    window.scrollTo(0, 0);
-
     return (
         <>
             <div className='flex rounded-xl'>

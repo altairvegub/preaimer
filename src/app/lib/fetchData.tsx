@@ -1,17 +1,28 @@
 'use server'
-async function fetchData() {
+
+export interface Score {
+    userId: number;
+    username: string;
+    scenarioId: number;
+    xCoordinate: number;
+    yCoordinate: number;
+    distance: number;
+    achievedAt: Date;
+}
+
+export async function fetchData() {
     const url = process.env.PREAIMER_API + '/scores';
     if (!url) throw new Error("API_URL is not defined");
-    console.log("fetchData() called");
 
     try {
         const response = await fetch(url);
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
         }
-        const userScores = await response.json();
-        console.log(userScores);
-        return await userScores;
+
+        const scores: Score[] = await response.json();
+
+        return scores;
     } catch (error: unknown) {
         if (error instanceof Error) {
             console.error(error.message);
@@ -20,5 +31,3 @@ async function fetchData() {
         }
     }
 }
-
-export default fetchData;

@@ -16,7 +16,7 @@ function GamePlayOverlay() {
 
     return (
         <>
-            <div className='w-56 p-3 z-10 left-14 fixed flex flex-col justify-center items-center gap-1 bg-black/65 rounded-xl'>
+            <div className='w-56 p-3 z-10 top-12 left-12 fixed flex flex-col justify-center items-center gap-1 bg-black/65 rounded-xl'>
                 <span className='text-lg text-slate-300 tracking-tight'> Scenario </span>
                 <span className='text-3xl tracking-wider'>{scenarioNum}/{3}</span>
                 <button

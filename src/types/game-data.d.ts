@@ -29,3 +29,12 @@ interface GameState {
     updateCoordinates: (coordinates: Coordinates) => void,
     resetScenario: () => void,
 }
+
+interface Score {
+    userId: number;
+    username: string;
+    scenarioId: number;
+    xCoordinate: number;
+    yCoordinate: number;
+    achievedAt: string;
+}

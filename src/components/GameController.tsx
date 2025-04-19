@@ -5,6 +5,7 @@ import GameResult from './GameResult';
 import { create } from 'zustand'
 import GameUserInterface from './GameUserInterface';
 import GameFinish from './GameFinish';
+import { calculateDistance, calculateHeight } from '@/app/lib/scoreCalculations';
 
 const DebugPanel = ({ coordinates, gameState }: { coordinates: Coordinates, gameState: GameState }) => (
     <div className="mt-4 p-4 text-white bg-midnight rounded text-sm">
@@ -22,7 +23,7 @@ const gameStatusTransitions: Record<GameStatus, GameStatus> = {
 };
 
 // hard coded values, these will be retrieved from external backend
-const scenarioIds: number[] = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+const scenarioIds: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const scenarios: string[] = ["ascent_1", "ascent_2", "ascent_3", "ascent_4", "ascent_5", "ascent_6", "ascent_7", "ascent_8", "ascent_9", "ascent_10"];
 const scenarioMap: Record<number, string> = {};
 
@@ -53,27 +54,8 @@ export const useGameStore = create<GameState>()((set) => ({
     resetScenario: () => set(() => ({ scenario: 1 })),
 }))
 
-function calculateDistance(coordinates: Coordinates) {
-    const midX = 1280;
-    const midY = 720;
-
-    const x = coordinates.x;
-    const y = coordinates.y;
-
-    const score = Math.round(Math.sqrt(Math.pow((x - midX), 2) + Math.pow((y - midY), 2))) //distance formula of click to mid-point (target)
-
-    return score;
-}
-
-function calculateHeight(coordinates: Coordinates) {
-    const midYCoord = 720;
-    const height = Math.abs(midYCoord - coordinates.y);
-
-    return height;
-}
 
 function GameController() {
-    const coordinates = useGameStore(state => state.coordinates);
     const updateCoordinates = useGameStore(state => state.updateCoordinates);
     const updateCurrScore = useGameStore(state => state.updateCurrScore);
     const updateCurrDistance = useGameStore(state => state.updateCurrDistance);
@@ -94,7 +76,8 @@ function GameController() {
     };
 
     const gameStatus = useGameStore((state: GameState) => state.gameStatus);
-    const gameState = useGameStore();
+    const gameState = useGameStore(); // for debug
+    const coordinates = useGameStore(state => state.coordinates); // for debug
 
     return (
         <>
