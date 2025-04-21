@@ -8,11 +8,11 @@ export default function Home() {
         <>
             <div className="max-w-[1200px] mx-auto">
                 <div className="w-full flex items-center flex-col">
-                    <div id="hero" className="p-[70px] space-y-2">
-                        <p className='text-white text-6xl tracking-tighter text-center'>
-                            <span>how well can you <span className="text-accent">preaim</span>?</span>
+                    <div id="hero" className="p-[70px] space-y-5">
+                        <p className='text-slate-200 text-6xl tracking-tighter text-center'>
+                            <span className='text-gradient-to-t from-white/100 to-slate-400/20'>how well can you <span className="text-red-600 relative -top-3 transform inline-block ring-1 ring-white/25 bg-gradient-to-t from-gray-800/25 to-white/20 rotate-3 backdrop-blur rounded-xl md:px-3 px-1 mr-2 mt-1 md:mx-0 md:mt-0">pre</span><span className="text-accent">aim</span>?</span>
                         </p>
-                        <p className='text-slate-500 font-light tracking-tight text-xl text-center'>
+                        <p className='text-slate-500 tracking-tight text-xl text-center'>
                             <span>See how your crosshair placement compares to others</span>
                         </p>
                     </div>
@@ -27,8 +27,8 @@ export default function Home() {
                             {/* <div className="text-white h-5"><p className='text-red-500 font-bold'></p ></div> */}
                             <div className='w-full flex justify-center'>
                                 <Link href='/play'>
-                                    <button className="w-72 p-3 bg-accent text-black rounded-xl">
-                                        Play
+                                    <button className="w-72 p-3 bg-gradient-to-t from-accent to-purple-200 text-black rounded-xl">
+                                        <span className=''>Play</span>
                                     </button>
                                 </Link>
                             </div>

@@ -14,7 +14,7 @@ function Header() {
                 <div className="flex items-center justify-center pr-1">
                     <Icon />
                 </div>
-                <div>
+                <div className="text-primary-gray">
                     preaimer
                 </div>
             </Link>

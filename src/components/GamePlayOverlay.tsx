@@ -6,6 +6,7 @@ function GameplayOverlay() {
     const [toggleMap, setToggleMap] = useState(false)
     const scenarios = useGameStore(state => state.scenarios);
     const scenarioNum = useGameStore(state => state.scenario);
+    const totalScenarios = 3;
 
     const r2Url = `https://${process.env.NEXT_PUBLIC_CDN_DOMAIN}/`;
     const mapScenarioPath = `${r2Url + scenarios[scenarioNum - 1]}_map.jpg`;
@@ -18,9 +19,9 @@ function GameplayOverlay() {
         <>
             <div className='w-56 p-3 z-10 top-12 left-12 fixed flex flex-col justify-center items-center gap-1 bg-black/65 rounded-xl'>
                 <span className='text-lg text-slate-300 tracking-tight'> Scenario </span>
-                <span className='text-3xl tracking-wider'>{scenarioNum}/{3}</span>
+                <span className='text-3xl tracking-wider'>{scenarioNum}/{totalScenarios}</span>
                 <button
-                    className='w-48 py-2 rounded-lg font-semibold text-l text-white bg-slate-500'
+                    className='w-48 py-2 rounded-lg font-semibold text-l text-primary-gray bg-slate-500'
                     onClick={onButtonClick}
                 >
                     View target on map

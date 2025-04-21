@@ -96,7 +96,7 @@ function ResultsOverlay({ coordinates }: ResultsOverlayProps) { // pass native c
         ctx.moveTo(startCoord.x * resolutionRatio, startCoord.y * resolutionRatio);
         ctx.lineTo(endCoord.x * resolutionRatio, endCoord.y * resolutionRatio);
 
-        ctx.strokeStyle = "white";
+        ctx.strokeStyle = "#f5f5f7";
         ctx.stroke();
     }, [resolutionRatio]);
 

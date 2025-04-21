@@ -75,7 +75,7 @@ function GameUserInterface() {
                     );
                 })}
             </Head>
-            <div className="flex justify-between items-center mb-4 p-4 text-white bg-midnight rounded">
+            <div className="flex justify-between items-center mb-4 p-4 text-primary-gray bg-midnight rounded">
                 {(gameStatus === 'idle') && <Button colour='green' label='Play Game' clickHandler={onButtonClick} />}
                 {gameStatus === 'playing' &&
                     <>

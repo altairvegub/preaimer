@@ -21,7 +21,7 @@ function Score() {
             }}>
             {coordinates.y === midY ?
                 <>
-                    <span className="text-3xl text-white tracking-tight"> Perfect!</span>
+                    <span className="text-3xl text-primary-gray tracking-tight"> Perfect!</span>
                     <span className='text-xl text-slate-400'>0 vertical px deviation</span>
                 </>
                 :

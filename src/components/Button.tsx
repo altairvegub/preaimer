@@ -11,15 +11,15 @@ type ButtonProps = {
 
 function Button({ colour, label, clickHandler }: ButtonProps) {
     const colourClasses: ColourMap = {
-        //red: "text-white bg-red-500 hover:bg-red-600",
-        //blue: "text-white bg-blue-500 hover:bg-blue-600",
-        //slate: "text-white bg-slate-500 hover:bg-slate-600",
-        //green: "text-white bg-green-500 hover:bg-green-600",
+        //red: "text-primary-gray bg-red-500 hover:bg-red-600",
+        //blue: "text-primary-gray bg-blue-500 hover:bg-blue-600",
+        //slate: "text-primary-gray bg-slate-500 hover:bg-slate-600",
+        //green: "text-primary-gray bg-green-500 hover:bg-green-600",
         //disabled: "text-gray-500 bg-gray-400",
-        red: "text-white bg-red-600",
-        blue: "text-white bg-blue-600",
-        slate: "text-white bg-slate-600",
-        green: "text-white bg-green-600",
+        red: "text-primary-gray bg-red-600",
+        blue: "text-primary-gray bg-blue-600",
+        slate: "text-primary-gray bg-slate-600",
+        green: "text-primary-gray bg-green-600",
         disabled: "text-gray-500 bg-gray-400",
     }
 

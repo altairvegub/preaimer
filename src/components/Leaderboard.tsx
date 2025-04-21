@@ -88,7 +88,7 @@ function Leaderboard({ size }: LeaderboardProps) {
                                 <th className="pt-2 pb-2 font-medium text-right w-2/6 pr-4">Avg. Pixels Missed</th>
                             </tr>
                         </thead>
-                        <tbody className="text-white bg-secondary odd:bg-primary">
+                        <tbody className="text-primary-gray bg-secondary odd:bg-primary">
                             {
                                 scores?.items?.map((score: Score, index: number) => (
                                     <tr key={index} className={index % 2 === 0 ? 'bg-primary' : 'bg-secondary'}>

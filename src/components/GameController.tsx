@@ -91,7 +91,7 @@ function GameController() {
                 </div>
             }
             {gameStatus === 'gameOver' && <GameFinish />}
-            <DebugPanel coordinates={coordinates} gameState={gameState} />
+            {/*<DebugPanel coordinates={coordinates} gameState={gameState} /> */}
         </>
     )
 }
