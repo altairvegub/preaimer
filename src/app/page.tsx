@@ -3,6 +3,19 @@ import Leaderboard from "@/components/Leaderboard";
 import Image from "next/image";
 import Link from "next/link";
 
+const preaimScopeClass = `
+  text-red-600 relative -top-1 transform ring-1 ring-white/25
+  bg-gradient-to-t from-gray-800/25 to-white/20 rotate-6
+  backdrop-blur inline-flex justify-center items-center
+  w-24 h-24 rounded-full mr-2 mt-1 md:mx-0 md:mt-0
+  before:content-[''] before:absolute before:w-full before:h-0.5
+  before:bg-gray-500/75 before:left-0 before:top-1/2
+  before:-translate-y-1/2 before:z-10
+  after:content-[''] after:absolute after:h-full after:w-0.5
+  after:bg-gray-500/75 after:top-0 after:left-1/2
+  after:-translate-x-1/2 after:z-10
+`;
+
 export default function Home() {
     return (
         <>
@@ -10,11 +23,9 @@ export default function Home() {
                 <div className="w-full flex items-center flex-col">
                     <div id="hero" className="p-[70px] space-y-5">
                         <p className='text-slate-200 text-6xl tracking-tighter text-center'>
-                            <span className='text-gradient-to-t from-white/100 to-slate-400/20'>how well can you <span className="text-red-600 relative -top-3 transform ring-1 ring-white/25 bg-gradient-to-t from-gray-800/25 to-white/20 rotate-6 backdrop-blur inline-flex justify-center items-center w-24 h-24 rounded-full mr-2 mt-1 md:mx-0 md:mt-0
-                            before:content-[''] before:absolute before:w-full before:h-0.5 before:bg-gray-500/75
-                            before:left-0 before:top-1/2 before:-translate-y-1/2 before:z-10
-                            after:content-[''] after:absolute after:h-full after:w-0.5 after:bg-gray-500/75
-                            after:top-0 after:left-1/2 after:-translate-x-1/2 after:z-10">pre</span><span className="text-accent">aim</span>?</span>
+                            <span className='text-gradient-to-t from-white/100 to-slate-400/20'>how well can you{' '}
+                                <span className={preaimScopeClass}>pre</span>
+                                <span className="text-accent">aim</span>?</span>
                         </p>
                         <p className='text-slate-500 tracking-tight text-xl text-center'>
                             <span>See how your crosshair placement compares to others</span>
@@ -31,7 +42,7 @@ export default function Home() {
                             {/* <div className="text-white h-5"><p className='text-red-500 font-bold'></p ></div> */}
                             <div className='w-full flex justify-center'>
                                 <Link href='/play'>
-                                    <button className="w-72 p-3 bg-gradient-to-t from-accent to-purple-200 text-black rounded-xl">
+                                    <button className="w-72 p-3 bg-accent text-black rounded-xl">
                                         <span className=''>Play</span>
                                     </button>
                                 </Link>
