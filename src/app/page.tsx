@@ -22,12 +22,12 @@ export default function Home() {
             <div className="max-w-[1200px] mx-auto">
                 <div className="w-full flex items-center flex-col">
                     <div id="hero" className="p-[70px] space-y-5">
-                        <p className='text-slate-200 text-6xl tracking-tighter text-center'>
+                        <p className='text-slate-200 text-7xl tracking-tighter text-center'>
                             <span className='text-gradient-to-t from-white/100 to-slate-400/20'>how well can you{' '}
                                 <span className={preaimScopeClass}>pre</span>
                                 <span className="text-accent">aim</span>?</span>
                         </p>
-                        <p className='text-slate-500 tracking-tight text-xl text-center'>
+                        <p className='text-slate-400 tracking-tight text-xl text-center'>
                             <span>See how your crosshair placement compares to others</span>
                         </p>
                     </div>

@@ -79,11 +79,11 @@ function Leaderboard({ size }: LeaderboardProps) {
                 <div className="">
                     {/* <h2 className="text-slate-500 text-xl tracking-tighter text-center">Leaderboard</h2> */}
                 </div>
-                <div className="rounded-lg overflow-hidden drop-shadow-lg">
-                    <table className="text-xl w-full table-fixed border-separate border-spacing-0 border border-secondary rounded-lg">
+                <div className="drop-shadow-lg overflow-hidden rounded-lg border border-secondary">
+                    <table className="text-xl w-full table-fixed border-collapse">
                         <thead className="text-left">
                             <tr className="text-base text-slate-500 bg-secondary">
-                                <th className="pt-2 pb-2 font-medium w-1/6 text-center rounded-tl-lg">Rank</th>
+                                <th className="pt-2 pb-2 font-medium w-1/6 text-center">Rank</th>
                                 <th className="pt-2 pb-2 font-medium w-3/6">Player</th>
                                 <th className="pt-2 pb-2 font-medium text-right w-2/6 pr-4">Avg. Pixels Missed</th>
                             </tr>
@@ -96,7 +96,8 @@ function Leaderboard({ size }: LeaderboardProps) {
                                         <td className="pt-2 pb-2 text-xl tracking-tight">{score.username}</td>
                                         <td className="pt-2 pb-2 text-right pr-4">{Math.round(score.distance)}</td>
                                     </tr>
-                                ))}
+                                ))
+                            }
                         </tbody>
                     </table>
                 </div>
