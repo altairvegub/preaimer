@@ -27,7 +27,7 @@ export default function Home() {
                                 <span className={preaimScopeClass}>pre</span>
                                 <span className="text-accent">aim</span>?</span>
                         </p>
-                        <p className='text-slate-400 tracking-tight text-xl text-center'>
+                        <p className='text-slate-400 font-light tracking-tight text-xl text-center'>
                             <span>See how your crosshair placement compares to others</span>
                         </p>
                     </div>
